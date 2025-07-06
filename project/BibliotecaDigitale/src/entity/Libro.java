@@ -12,7 +12,7 @@ public class Libro {
     private int codiceISBN;
     private String descrizione;
 
-    private int disponibilitaCopie;
+    private int numeroCopieTotali;
     List<CopiaLibro> listaCopie;
 
     public Libro(String titolo, String autore, int annoDiPubblicazione, String genere, int codiceISBN, String descrizione) {
@@ -22,18 +22,18 @@ public class Libro {
         this.genere = genere;
         this.codiceISBN = codiceISBN;
         this.descrizione = descrizione;
-        this.disponibilitaCopie = 0;
+        this.numeroCopieTotali = 0;
         this.listaCopie = new ArrayList<>();
     }
 
     public void aggiungiCopia() {
         CopiaLibro copia = new CopiaLibro(this);
         listaCopie.add(copia);
-        this.disponibilitaCopie++;
+        this.numeroCopieTotali++;
     }
 
-    public int getDisponibilitaCopie() {
-        return disponibilitaCopie;
+    public int getnumeroCopieTotali() {
+        return numeroCopieTotali;
     }
 
     public String getDescrizione() {
@@ -64,14 +64,17 @@ public class Libro {
         return listaCopie;
     }
 
+    /* 
     public void incrementaDisponibilitaCopie() {
         this.disponibilitaCopie++;
     }
 
     public void decrementaDisponibilitaCopie() {
         this.disponibilitaCopie--;
-    }
+    } */
 
+    //Enhanched for per scorrere "tutto", o fino a quando trovo il primo disponibile. 
+    //Questo metodo mi controlla la disponibilità alla prenotazione del libro
     public boolean verificaDisponibilita() {
         for (CopiaLibro copia: listaCopie) {
             if (copia.isDisponibile()) {
@@ -79,5 +82,17 @@ public class Libro {
             }
         }
         return false;
+    }
+
+    public int numeroCopieDisponibili(){
+        int numeroCopieDisponibili = 0;
+
+        for(CopiaLibro copia: listaCopie){
+            if (copia.isDisponibile()) {
+                numeroCopieDisponibili++;
+            }
+        }
+
+        return numeroCopieDisponibili;
     }
 }

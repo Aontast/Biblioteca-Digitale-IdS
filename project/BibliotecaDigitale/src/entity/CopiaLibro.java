@@ -3,6 +3,7 @@ package entity;
 public class CopiaLibro {
 
     private static int counter = 0;
+
     public enum StatoCopia {
         DISPONIBILE,
         INPRESTITO,
@@ -17,8 +18,6 @@ public class CopiaLibro {
         this.ID = counter++;
         this.stato = StatoCopia.DISPONIBILE;
         this.libro = libro;
-
-        this.libro.incrementaDisponibilitaCopie();
     }
 
     @Override
@@ -40,7 +39,6 @@ public class CopiaLibro {
 
     public void setStatoPrenotato(){
         this.stato = StatoCopia.PRENOTATO;
-        this.libro.decrementaDisponibilitaCopie();
     }
 
     public void setStatoInPrestito(){
@@ -50,19 +48,6 @@ public class CopiaLibro {
     public void setStatoDisponibile(){
         this.stato = StatoCopia.DISPONIBILE;
     }
-
-    /* 
-    public boolean checkStato() {
-        String statoUpper = this.stato.toUpperCase();
-    
-        if (statoUpper.equals("PRENOTATO") || 
-            statoUpper.equals("IN PRESTITO") || 
-            statoUpper.equals("DISPONIBILE")) {
-            return true;
-        }
-    
-        return false;
-    } */
 
     public boolean isDisponibile(){
         return this.stato.equals(StatoCopia.DISPONIBILE);
