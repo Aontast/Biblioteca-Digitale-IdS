@@ -9,7 +9,7 @@ public class Libro {
     private int codiceISBN;
     private String descrizione;
 
-    private static int disponibilitaCopie;
+    private int disponibilitaCopie;
     private CopiaLibro listaCopie[];
 
     public Libro(String titolo, String autore, int annoDiPubblicazione, String genere, int codiceISBN, String descrizione) {
@@ -19,16 +19,16 @@ public class Libro {
         this.genere = genere;
         this.codiceISBN = codiceISBN;
         this.descrizione = descrizione;
-        disponibilitaCopie = 0;
+        this.disponibilitaCopie = 0;
     }
 
-    public void aggiungiCopia(String stato, Libro libro) {
-        CopiaLibro copia = new CopiaLibro(stato, libro);
-        listaCopie[disponibilitaCopie] = copia;
-        disponibilitaCopie++;
+    public void aggiungiCopia(Libro libro) {
+        CopiaLibro copia = new CopiaLibro(libro);
+        listaCopie[this.disponibilitaCopie] = copia;
+        this.disponibilitaCopie++;
     }
 
-    public static int getDisponibilitaCopie() {
+    public int getDisponibilitaCopie() {
         return disponibilitaCopie;
     }
 
@@ -54,5 +54,13 @@ public class Libro {
 
     public String getTitolo() {
         return titolo;
+    }
+
+    public void incrementaDisponibilitaCopie() {
+        this.disponibilitaCopie++;
+    }
+
+    public void decrementaDisponibilitaCopie() {
+        this.disponibilitaCopie--;
     }
 }
