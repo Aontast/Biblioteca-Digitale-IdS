@@ -64,7 +64,31 @@ public class Libro {
         return listaCopie;
     }
 
-    /* 
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
+    public void setAutore(String autore) {
+        this.autore = autore;
+    }
+
+    public void setAnnoDiPubblicazione(int annoDiPubblicazione) {
+        this.annoDiPubblicazione = annoDiPubblicazione;
+    }
+
+    public void setGenere(String genere) {
+        this.genere = genere;
+    }
+
+    public void setCodiceISBN(int codiceISBN) {
+        this.codiceISBN = codiceISBN;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    /*
     public void incrementaDisponibilitaCopie() {
         this.disponibilitaCopie++;
     }
