@@ -1,15 +1,21 @@
 package entity;
 
 public class CopiaLibro {
+
     private static int counter = 0;
+    public enum StatoCopia {
+        DISPONIBILE,
+        INPRESTITO,
+        PRENOTATO
+    }
 
     private int ID;
-    private String stato;
+    private StatoCopia stato;
     private Libro libro;
 
     public CopiaLibro(Libro libro){
         this.ID = counter++;
-        this.stato = "Disponibile";
+        this.stato = StatoCopia.DISPONIBILE;
         this.libro = libro;
 
         this.libro.incrementaDisponibilitaCopie();
@@ -17,14 +23,14 @@ public class CopiaLibro {
 
     @Override
     public String toString(){
-        return "CopiaLibro ID: " + this.ID + "\nStato: " + this.stato + "\nLibro: " + this.libro.getTitolo();
+        return "CopiaLibro ID: " + this.ID + "\nStato: " + this.stato.toString() + "\nLibro: " + this.libro.getTitolo();
     }
 
     public int getID() {
         return this.ID;
     }
 
-    public String getStato(){
+    public StatoCopia getStato(){
         return this.stato;
     }
 
@@ -33,16 +39,16 @@ public class CopiaLibro {
     }
 
     public void setStatoPrenotato(){
-        this.stato = "Prenotato";
+        this.stato = StatoCopia.PRENOTATO;
         this.libro.decrementaDisponibilitaCopie();
     }
 
     public void setStatoInPrestito(){
-        this.stato = "In prestito";
+        this.stato = StatoCopia.INPRESTITO;
     }
 
     public void setStatoDisponibile(){
-        this.stato = "Disponibile";
+        this.stato = StatoCopia.DISPONIBILE;
     }
 
     /* 
@@ -59,14 +65,14 @@ public class CopiaLibro {
     } */
 
     public boolean isDisponibile(){
-        return this.stato.equals("Disponibile");
+        return this.stato.equals(StatoCopia.DISPONIBILE);
     }
 
     public boolean isPrenotato(){
-        return this.stato.equals("Prenotato");
+        return this.stato.equals(StatoCopia.PRENOTATO);
     }
 
     public boolean isInPrestito(){
-        return this.stato.equals("In prestito");
+        return this.stato.equals(StatoCopia.INPRESTITO);
     }
 }

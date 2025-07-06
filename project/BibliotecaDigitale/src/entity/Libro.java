@@ -1,5 +1,8 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Libro {
 
     private String titolo;
@@ -10,7 +13,7 @@ public class Libro {
     private String descrizione;
 
     private int disponibilitaCopie;
-    private CopiaLibro listaCopie[];
+    List<CopiaLibro> listaCopie;
 
     public Libro(String titolo, String autore, int annoDiPubblicazione, String genere, int codiceISBN, String descrizione) {
         this.titolo = titolo;
@@ -20,11 +23,12 @@ public class Libro {
         this.codiceISBN = codiceISBN;
         this.descrizione = descrizione;
         this.disponibilitaCopie = 0;
+        this.listaCopie = new ArrayList<>();
     }
 
-    public void aggiungiCopia(Libro libro) {
-        CopiaLibro copia = new CopiaLibro(libro);
-        listaCopie[this.disponibilitaCopie] = copia;
+    public void aggiungiCopia() {
+        CopiaLibro copia = new CopiaLibro(this);
+        listaCopie.add(copia);
         this.disponibilitaCopie++;
     }
 
@@ -56,11 +60,24 @@ public class Libro {
         return titolo;
     }
 
+    public List<CopiaLibro> getListaCopie() {
+        return listaCopie;
+    }
+
     public void incrementaDisponibilitaCopie() {
         this.disponibilitaCopie++;
     }
 
     public void decrementaDisponibilitaCopie() {
         this.disponibilitaCopie--;
+    }
+
+    public boolean verificaDisponibilita() {
+        for (CopiaLibro copia: listaCopie) {
+            if (copia.isDisponibile()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
