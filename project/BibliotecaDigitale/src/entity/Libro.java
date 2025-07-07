@@ -15,12 +15,12 @@ public class Libro {
     private int numeroCopieTotali;
     List<CopiaLibro> listaCopie;
 
-    public Libro(String titolo, String autore, int annoDiPubblicazione, String genere, int codiceISBN, String descrizione) {
+    public Libro(int codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione,  int numeroCopieTotali) {
+        this.codiceISBN = codiceISBN;
         this.titolo = titolo;
         this.autore = autore;
         this.annoDiPubblicazione = annoDiPubblicazione;
         this.genere = genere;
-        this.codiceISBN = codiceISBN;
         this.descrizione = descrizione;
         this.numeroCopieTotali = 0;
         this.listaCopie = new ArrayList<>();
@@ -99,6 +99,7 @@ public class Libro {
 
     //Enhanched for per scorrere "tutto", o fino a quando trovo il primo disponibile. 
     //Questo metodo mi controlla la disponibilità alla prenotazione del libro
+
     public boolean verificaDisponibilita() {
         for (CopiaLibro copia: listaCopie) {
             if (copia.isDisponibile()) {
@@ -118,5 +119,19 @@ public class Libro {
         }
 
         return numeroCopieDisponibili;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "titolo='" + titolo + '\'' +
+                ", autore='" + autore + '\'' +
+                ", annoDiPubblicazione=" + annoDiPubblicazione +
+                ", genere='" + genere + '\'' +
+                ", codiceISBN=" + codiceISBN +
+                ", descrizione='" + descrizione + '\'' +
+                ", numeroCopieTotali=" + numeroCopieTotali +
+                ", listaCopie=" + listaCopie +
+                '}';
     }
 }

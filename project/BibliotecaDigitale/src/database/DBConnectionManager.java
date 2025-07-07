@@ -42,7 +42,9 @@ public class DBConnectionManager {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
 
-        return stmt.executeQuery(query);
+        ResultSet rs = stmt.executeQuery(query);
+
+        return rs;
     }
 
     public static int updateQuery(String query) throws ClassNotFoundException, SQLException {

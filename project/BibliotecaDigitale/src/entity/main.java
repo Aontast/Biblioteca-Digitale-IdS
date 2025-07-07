@@ -1,20 +1,26 @@
 package entity;
 
+import database.LibroDAO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class main {
     public static void main(String[] args) {
-        Libro libro1 = new Libro("Il Signore degli Anelli", "J.R.R. Tolkien", 1954, "Fantasy", 1234567890, "molto bello");
+        Libro libro1 = new Libro(4, "IT4", "J.R.R. Tolkien", 1954, "Fantasy", "molto bello", 0);
+        LibroDAO libroDAO = new LibroDAO();
 
-        libro1.aggiungiCopia();
-        List<CopiaLibro> lista = libro1.getListaCopie();
+        System.out.println(libroDAO.salvaLibro(libro1));
 
-        CopiaLibro copia = lista.get(0);
-        System.out.println("copia.getStato() = " + copia.getStato());
+        List<Libro> listaLibriDB;
 
-        copia.setStatoInPrestito();
-        System.out.println("copia.getStato() = " + copia.getStato());
+        listaLibriDB = libroDAO.getAllLibri();
 
+        for (Libro libro : listaLibriDB) {
+            System.out.println(libro);
+        }
+
+        System.out.println(libroDAO.searchLibroByISBN(3));
         
 
     }
