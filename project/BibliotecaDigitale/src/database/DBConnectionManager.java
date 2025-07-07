@@ -1,22 +1,27 @@
 package database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 public class DBConnectionManager {
 
     // Parametri di connessione al database
-    private static final String url = "jdbc:mysql://localhost:3306/your_database_name";
-    private static final String dbName = "biblioteca";
-    private static final String driver = "com.mysql.cj.jdbc.Driver";
-    private static final String username = "root";
-    private static final String password = "admin";
+    private static final String URL = "jdbc:mysql://localhost:3306/";
+    private static final String DBNAME = "biblioteca";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "admin";
 
     //metodo apertura connessione
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
-        Class.forName(driver);
+        Class.forName(DRIVER);
 
-        conn = DriverManager.getConnection(url+dbName, username, password);
+        conn = DriverManager.getConnection(URL+DBNAME, USERNAME, PASSWORD);
+        System.out.println("Connessione al database stabilita con successo.");
         return conn;
     }
 
@@ -49,5 +54,21 @@ public class DBConnectionManager {
         return result;
     }
 
+    public static Integer updateQueryReturnGeneratedKey(String query) throws ClassNotFoundException, SQLException {
+        Integer ret = null;
+
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+        ResultSet rs = statement.getGeneratedKeys();
+        if (rs.next()){
+            ret = rs.getInt(1);
+        }
+
+        conn.close();
+
+        return ret;
+    }
 
 }
