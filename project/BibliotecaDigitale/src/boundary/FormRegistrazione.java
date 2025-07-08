@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -60,11 +61,18 @@ public class FormRegistrazione extends JFrame {
     public FormRegistrazione() {
         // Carica l'immagine di background
         try {
-            backgroundImage = Toolkit.getDefaultToolkit().getImage("background.jpg");
+            backgroundImage = new ImageIcon(getClass().getResource("/resources/background.jpg")).getImage();
         } catch (Exception e) {
             System.out.println("Errore caricamento immagine: " + e.getMessage());
         }
 
+        try {
+            Image icon = new ImageIcon(getClass().getResource("/resources/iconaApp.jpg")).getImage();
+            setIconImage(icon);
+        } catch (Exception e) {
+            System.out.println("Errore caricamento icona: " + e.getMessage());
+        }
+        
         panelHome.setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
