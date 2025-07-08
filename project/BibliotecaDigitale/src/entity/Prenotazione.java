@@ -38,4 +38,6 @@ public class Prenotazione {
     public void generaRicevuta(){
         //DA VEDERE
     }
+
+    
 }
