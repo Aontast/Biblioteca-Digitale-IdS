@@ -1,9 +1,9 @@
 package database;
 
 import entity.Libro;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class LibroDAO {
      * @param libro Libro da salvare
      * @return 0 se il salvataggio è andato a buon fine, -1 in caso contrario
      */
-    public int salvaLibro(Libro libro) {
+    public int salvaLibro(Libro libro) throws SQLIntegrityConstraintViolationException {
 
-        int result = 0;
+        int result;
         String query = "INSERT INTO libri VALUES(%d, '%s', '%s', %d, '%s', '%s', %d)".formatted(
                 libro.getCodiceISBN(),
                 libro.getTitolo(),
@@ -37,7 +37,8 @@ public class LibroDAO {
         try {
             result = DBConnectionManager.updateQuery(query);
             System.out.println("[SalvaLibro] Libro Salvato con successo nel database");
-
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw e;
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("[SalvaLibro] Libro non salvato nel database: " + e.getMessage());
             result = -1;
@@ -85,7 +86,7 @@ public class LibroDAO {
      * @param isbn ISBN del libro da cercare
      * @return true se il libro è stato trovato, false altrimenti
      */
-    public boolean searchLibroByISBN(int isbn) {
+    public boolean hasLibroConISBN(int isbn) {
 
         boolean libroTrovato = false;
 
@@ -101,6 +102,41 @@ public class LibroDAO {
 
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("[searchLibroByISBN] Libro dal database non cercato: " + e.getMessage());
+        }
+
+        return libroTrovato;
+    }
+
+
+    /**
+     * Metodo per recuperare un libro dal database tramite il suo ISBN
+     * @param isbn ISBN del libro da recuperare
+     * @return Libro se trovato, null altrimenti
+     */
+    public Libro getLibroByISBN(int isbn) {
+
+        Libro libroTrovato = null;
+
+        try {
+            String query = "SELECT * FROM libri WHERE ISBN = " + isbn;
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+            if (rs.next()) {
+                libroTrovato = new Libro(
+                        rs.getInt("ISBN"),
+                        rs.getString("Titolo"),
+                        rs.getString("Autore"),
+                        rs.getInt("AnnoPubblicazione"),
+                        rs.getString("Genere"),
+                        rs.getString("Descrizione"),
+                        rs.getInt("NumeroCopie")
+                );
+            }
+
+            System.out.println("[getLibroByISBN] Libro dal database recuperato");
+            rs.close();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("[getLibroByISBN] Libro dal database non recuperato: " + e.getMessage());
         }
 
         return libroTrovato;
