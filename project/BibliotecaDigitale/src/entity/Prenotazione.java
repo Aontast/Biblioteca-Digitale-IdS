@@ -2,30 +2,48 @@ package entity;
 
 public class Prenotazione {
     private int IDPrenotazione;
-    private float costoPrestito;
+    private double costoPrestito;
     private String dataConsegna; //VERIFICARE SE CAMBIARE IN DATE TRAMITE JAVA.TIME
     private CopiaLibro copiaLibro;
     private UtenteRegistrato utenteRegistrato;
 
-    public Prenotazione(float costoPrestito, String dataConsegna) {
+    public Prenotazione(String dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
         this.IDPrenotazione = -1; //per indicare che non è ancora stato assegnato dal DB
         this.costoPrestito = costoPrestito;
         this.dataConsegna = dataConsegna;
+        this.copiaLibro = copiaLibro;
+        this.utenteRegistrato = utenteRegistrato;
     }
 
-    public int getIDprenotazione() {
+    public Prenotazione(int IDPrenotazione, String dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
+        this.IDPrenotazione = IDPrenotazione;
+        this.costoPrestito = costoPrestito;
+        this.dataConsegna = dataConsegna;
+        this.copiaLibro = copiaLibro;
+        this.utenteRegistrato = utenteRegistrato;
+    }
+
+    public CopiaLibro getCopiaLibro() {
+        return copiaLibro;
+    }
+
+    public UtenteRegistrato getUtenteRegistrato() {
+        return utenteRegistrato;
+    }
+
+    public int getIDPrenotazione() {
         return IDPrenotazione;
     }
 
-    public void setIDprenotazione(int IDprenotazione) {
-        this.IDPrenotazione = IDprenotazione;
+    public void setIDPrenotazione(int IDPrenotazione) {
+        this.IDPrenotazione = IDPrenotazione;
     }
 
-    public float getCostoPrestito() {
+    public double getCostoPrestito() {
         return costoPrestito;
     }
 
-    public void setCostoPrestito(float costoPrestito) {
+    public void setCostoPrestito(double costoPrestito) {
         this.costoPrestito = costoPrestito;
     }
 

@@ -57,18 +57,7 @@ public class UtenteRegistratoDAO {
             if (rs.next()) {
                 String nome = rs.getString("nome");
                 String cognome = rs.getString("cognome");
-                String password = rs.getString("password");
-
-                if (rs.getInt("livelloPermesso") == 0) {
-                    utenteTrovato = new Amministratore(nome, cognome, email, password);
-                } else if (rs.getInt("livelloPermesso") == 1) {
-                    utenteTrovato = new AddettoBiblioteca(nome, cognome, email, password);
-                } else if  (rs.getInt("livelloPermesso") == 2) {
-                    utenteTrovato = new Cliente(nome, cognome, email, password);
-                }
-                else {
-                    System.out.println("Livello permesso non definito");
-                }
+                utenteTrovato = getUtenteRegistrato(rs, nome, cognome, email);
             }
 
             System.out.println("[getUtenteByEmail] Utente dal database recuperato");
@@ -107,6 +96,23 @@ public class UtenteRegistratoDAO {
         }
 
         return utenteTrovato;
+    }
+
+    static UtenteRegistrato getUtenteRegistrato(ResultSet rs, String nome, String cognome, String email) throws SQLException {
+        String password = rs.getString("password");
+        UtenteRegistrato utente = null;
+
+        if (rs.getInt("livelloPermesso") == 0) {
+            utente = new Amministratore(nome, cognome, email, password);
+        } else if (rs.getInt("livelloPermesso") == 1) {
+            utente = new AddettoBiblioteca(nome, cognome, email, password);
+        } else if  (rs.getInt("livelloPermesso") == 2) {
+            utente = new Cliente(nome, cognome, email, password);
+        }
+        else {
+            System.out.println("Livello permesso non definito");
+        }
+        return utente;
     }
 
 }

@@ -2,6 +2,7 @@ package entity;
 
 import database.CopiaLibroDAO;
 import database.LibroDAO;
+import database.PrenotazioneDAO;
 import database.UtenteRegistratoDAO;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -14,10 +15,25 @@ public class main {
         CopiaLibro copia = new CopiaLibro(libro);
         CopiaLibroDAO copiaDAO = new CopiaLibroDAO();
 
-
-        for (CopiaLibro copiaDisponibile: copiaDAO.getCopieDisponibili()) {
-            System.out.println(copiaDisponibile);
+        UtenteRegistrato utente = new Cliente("Mario", "Rossi", "email@", "password");
+        UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
+        try {
+            utenteDAO.salvaUtente(utente);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Utente già presente");
         }
+
+        copia.setID(2);
+        Prenotazione prenotazione = new Prenotazione("10/12", 32.3, copia, utente);
+        System.out.println(copia.getID() + utente.getEmail());
+
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        try {
+            prenotazioneDAO.salvaPrenotazione(prenotazione);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Prenotazione già esistente");
+        }
+
 
 
     }

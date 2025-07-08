@@ -1,5 +1,7 @@
 package entity;
 
+import database.LibroDAO;
+
 public class CopiaLibro {
 
     public enum StatoCopia {
@@ -64,5 +66,9 @@ public class CopiaLibro {
 
     public boolean isInPrestito(){
         return this.stato.equals(StatoCopia.IN_PRESTITO);
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
