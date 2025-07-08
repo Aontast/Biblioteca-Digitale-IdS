@@ -61,12 +61,12 @@ public class LibroDAO {
             while(rs.next()) {
                 listaLibri.add(new Libro(
                         rs.getInt("ISBN"),
-                        rs.getString("TITOLO"),
-                        rs.getString("AUTORE"),
-                        rs.getInt("ANNO_PUBBLICAZIONE"),
-                        rs.getString("GENERE"),
-                        rs.getString("DESCRIZIONE"),
-                        rs.getInt("NUMERO_COPIE")
+                        rs.getString("Titolo"),
+                        rs.getString("Autore"),
+                        rs.getInt("AnnoPubblicazione"),
+                        rs.getString("Genere"),
+                        rs.getString("Descrizione"),
+                        rs.getInt("NumeroCopie")
                         )
                 );
             }
