@@ -100,14 +100,14 @@ public class Libro {
     //Enhanched for per scorrere "tutto", o fino a quando trovo il primo disponibile. 
     //Questo metodo mi controlla la disponibilità alla prenotazione del libro
 
-    public boolean verificaDisponibilita() {
+    /*public boolean verificaDisponibilita() {
         for (CopiaLibro copia: listaCopie) {
             if (copia.isDisponibile()) {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     public int numeroCopieDisponibili(){
         int numeroCopieDisponibili = 0;
