@@ -2,7 +2,6 @@ package entity;
 
 import database.LibroDAO;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,12 +9,8 @@ public class Catalogo {
 
     private static Catalogo instance = null;
 
-    private int numeroLibriTotali;
-    List<Libro> listaLibri;
-
     private Catalogo(){
-        this.numeroLibriTotali = 0;
-        this.listaLibri = new ArrayList<>();
+        super();
     }
 
     // Costruttore Singleton Catalogo, non chiama costruttore chiama metodo che istanzia l'oggetto Catalogo
@@ -29,14 +24,14 @@ public class Catalogo {
     }
 
     public void mostraCatalogo(){
+
         // Istanzia un oggetto LibroDAO per interagire con il database
         // e recuperare la lista dei libri
         LibroDAO libroDAO = new LibroDAO();
-        this.listaLibri = libroDAO.getAllLibri();
-        for (Libro libro : this.listaLibri) {
+        List<Libro> listaLibri = libroDAO.getAllLibri();
+        for(Libro libro : listaLibri) {
             System.out.println(libro);
         }
-        numeroLibriTotali = this.listaLibri.size(); //non so se serve ma per il momento lo metto
     }
 
     public void filtraCatalogo(){
@@ -48,10 +43,6 @@ public class Catalogo {
         if (!libroDAO.hasLibroConISBN(libro.getCodiceISBN())) {
             // Salva il libro tramite il DAO
             libroDAO.salvaLibro(libro);
-            
-            // Aggiungi il libro alla lista interna
-            this.listaLibri.add(libro);
-            this.numeroLibriTotali++;
             
         } else {
             System.out.println("Il libro con ISBN " + libro.getCodiceISBN() + " è già presente nel catalogo.");
