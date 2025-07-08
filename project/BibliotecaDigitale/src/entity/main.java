@@ -1,27 +1,19 @@
 package entity;
 
-import database.LibroDAO;
+import database.UtenteRegistratoDAO;
 
-import java.util.List;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class main {
     public static void main(String[] args) {
-        Libro libro1 = new Libro(3, "dew", "J.R.R. Tolkien", 1954, "Fantasy", "molto bello", 0);
-        LibroDAO libroDAO = new LibroDAO();
 
-        System.out.println(libroDAO.salvaLibro(libro1));
+        UtenteRegistrato utente = new Cliente("Antonio", "Di Giorgio", "antodg@", "password");
 
-        List<Libro> listaLibriDB;
-
-        listaLibriDB = libroDAO.getAllLibri();
-
-        for (Libro libro : listaLibriDB) {
-            System.out.println(libro);
+        UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
+        try {
+            utenteDAO.salvaUtente(utente);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Utente già registrato");
         }
-
-        System.out.println(libroDAO.hasLibroConISBN(3));
-        System.out.println(libroDAO.getLibroByISBN(3));
-        
-
     }
 }

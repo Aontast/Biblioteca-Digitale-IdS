@@ -4,6 +4,7 @@ import entity.Libro;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class LibroDAO {
      * @param libro Libro da salvare
      * @return 0 se il salvataggio è andato a buon fine, -1 in caso contrario
      */
-    public int salvaLibro(Libro libro) {
+    public int salvaLibro(Libro libro) throws SQLIntegrityConstraintViolationException {
 
         int result;
         String query = "INSERT INTO libri VALUES(%d, '%s', '%s', %d, '%s', '%s', %d)".formatted(
@@ -37,7 +38,8 @@ public class LibroDAO {
         try {
             result = DBConnectionManager.updateQuery(query);
             System.out.println("[SalvaLibro] Libro Salvato con successo nel database");
-
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw e;
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("[SalvaLibro] Libro non salvato nel database: " + e.getMessage());
             result = -1;
