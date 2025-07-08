@@ -141,4 +141,28 @@ public class LibroDAO {
 
         return libroTrovato;
     }
+
+    /**
+     * Metodo per aggiornare numero copie libro nel database
+     * @param libro Libro da aggiornare
+     * @return 0 se l'aggiornamento è andato a buon fine, -1 in caso contrario
+     */
+    public int updateNumeroCopieLibro(Libro libro) {
+
+        int result;
+        String query = "UPDATE libri SET NumeroCopie = %d WHERE ISBN = %d".formatted(
+                libro.getnumeroCopieTotali(),
+                libro.getCodiceISBN()
+        );
+
+        try {
+            result = DBConnectionManager.updateQuery(query);
+            System.out.println("[aggiornaNumeroCopieLibro] Libro aggiornato con successo nel database");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println("[aggiornaNumeroCopieLibro] Libro non aggiornato nel database: " + e.getMessage());
+            result = -1;
+        }
+
+        return result;
+    }
 }
