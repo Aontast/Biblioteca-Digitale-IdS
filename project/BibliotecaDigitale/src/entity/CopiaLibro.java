@@ -2,11 +2,9 @@ package entity;
 
 public class CopiaLibro {
 
-    private static int counter = 0;
-
     public enum StatoCopia {
         DISPONIBILE,
-        INPRESTITO,
+        IN_PRESTITO,
         PRENOTATO
     }
 
@@ -14,8 +12,15 @@ public class CopiaLibro {
     private StatoCopia stato;
     private Libro libro;
 
+    //Costruttore per recuperare le copie dal database
+    public CopiaLibro(int id, String stato, Libro libro) {
+        this.ID = id;
+        this.stato = StatoCopia.valueOf(stato);
+        this.libro = libro;
+    }
+
     public CopiaLibro(Libro libro){
-        this.ID = counter++;
+        this.ID = -1; //per indicare che non è ancora stato assegnato dal DB
         this.stato = StatoCopia.DISPONIBILE;
         this.libro = libro;
     }
@@ -42,7 +47,7 @@ public class CopiaLibro {
     }
 
     public void setStatoInPrestito(){
-        this.stato = StatoCopia.INPRESTITO;
+        this.stato = StatoCopia.IN_PRESTITO;
     }
 
     public void setStatoDisponibile(){
@@ -58,6 +63,6 @@ public class CopiaLibro {
     }
 
     public boolean isInPrestito(){
-        return this.stato.equals(StatoCopia.INPRESTITO);
+        return this.stato.equals(StatoCopia.IN_PRESTITO);
     }
 }

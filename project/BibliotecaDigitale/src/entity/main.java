@@ -1,5 +1,7 @@
 package entity;
 
+import database.CopiaLibroDAO;
+import database.LibroDAO;
 import database.UtenteRegistratoDAO;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -7,17 +9,16 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class main {
     public static void main(String[] args) {
 
-        UtenteRegistrato utente = new Cliente("Antonio", "Di Giorgio", "antodg@", "password");
+        Libro libro = new Libro(1111111111111L, "Il Grande Gatsby", "F. Scott Fitzgerald", 1925, "Romanzo", "Un classico della letteratura americana che esplora temi di decadimento, idealismo e resistenza al cambiamento sociale.");
 
-        UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
-        try {
-            utenteDAO.salvaUtente(utente);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            System.err.println("Utente già registrato");
+        CopiaLibro copia = new CopiaLibro(libro);
+        CopiaLibroDAO copiaDAO = new CopiaLibroDAO();
+
+
+        for (CopiaLibro copiaDisponibile: copiaDAO.getCopieDisponibili()) {
+            System.out.println(copiaDisponibile);
         }
 
-        String query = "SELECT * FROM utente WHERE Email = '" + utente.getEmail() + "'";
-        System.out.println(query);
-        System.out.println(utenteDAO.hasUtenteConEmail(utente.getEmail()));
+
     }
 }

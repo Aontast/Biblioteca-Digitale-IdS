@@ -9,13 +9,13 @@ public class Libro {
     private String autore;
     private int annoDiPubblicazione;
     private String genere;
-    private int codiceISBN;
+    private long codiceISBN;
     private String descrizione;
 
     private int numeroCopieTotali;
     List<CopiaLibro> listaCopie;
 
-    public Libro(int codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione,  int numeroCopieTotali) {
+    public Libro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) {
         this.codiceISBN = codiceISBN;
         this.titolo = titolo;
         this.autore = autore;
@@ -23,6 +23,17 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = 0;
+        this.listaCopie = new ArrayList<>();
+    }
+
+    public Libro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione, int numeroCopieTotali) {
+        this.codiceISBN = codiceISBN;
+        this.titolo = titolo;
+        this.autore = autore;
+        this.annoDiPubblicazione = annoDiPubblicazione;
+        this.genere = genere;
+        this.descrizione = descrizione;
+        this.numeroCopieTotali = numeroCopieTotali;
         this.listaCopie = new ArrayList<>();
     }
 
@@ -40,7 +51,7 @@ public class Libro {
         return descrizione;
     }
 
-    public int getCodiceISBN() {
+    public long getCodiceISBN() {
         return codiceISBN;
     }
 
@@ -80,7 +91,7 @@ public class Libro {
         this.genere = genere;
     }
 
-    public void setCodiceISBN(int codiceISBN) {
+    public void setCodiceISBN(long codiceISBN) {
         this.codiceISBN = codiceISBN;
     }
 

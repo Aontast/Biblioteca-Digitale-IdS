@@ -2,13 +2,15 @@ package entity;
 
 public class Prenotazione {
     private int IDPrenotazione;
-    private int costoComplessivoPrestito;
-    private String data; //VERIFICARE SE CAMBIARE IN DATE TRAMITE JAVA.TIME
+    private float costoPrestito;
+    private String dataConsegna; //VERIFICARE SE CAMBIARE IN DATE TRAMITE JAVA.TIME
+    private CopiaLibro copiaLibro;
+    private UtenteRegistrato utenteRegistrato;
 
-    public Prenotazione(int IDprenotazione, int costoComplessivoPrestito, String data) {
-        this.IDPrenotazione = IDprenotazione;
-        this.costoComplessivoPrestito = costoComplessivoPrestito;
-        this.data = data;
+    public Prenotazione(float costoPrestito, String dataConsegna) {
+        this.IDPrenotazione = -1; //per indicare che non è ancora stato assegnato dal DB
+        this.costoPrestito = costoPrestito;
+        this.dataConsegna = dataConsegna;
     }
 
     public int getIDprenotazione() {
@@ -19,20 +21,20 @@ public class Prenotazione {
         this.IDPrenotazione = IDprenotazione;
     }
 
-    public int getCostoComplessivoPrestito() {
-        return costoComplessivoPrestito;
+    public float getCostoPrestito() {
+        return costoPrestito;
     }
 
-    public void setCostoComplessivoPrestito(int costoComplessivoPrestito) {
-        this.costoComplessivoPrestito = costoComplessivoPrestito;
+    public void setCostoPrestito(float costoPrestito) {
+        this.costoPrestito = costoPrestito;
     }
 
-    public String getData() {
-        return data;
+    public String getDataConsegna() {
+        return dataConsegna;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDataConsegna(String dataConsegna) {
+        this.dataConsegna = dataConsegna;
     }
 
     public void generaRicevuta(){

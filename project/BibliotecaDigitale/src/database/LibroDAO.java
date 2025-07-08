@@ -86,7 +86,7 @@ public class LibroDAO {
      * @param isbn ISBN del libro da cercare
      * @return true se il libro è stato trovato, false altrimenti
      */
-    public boolean hasLibroConISBN(int isbn) {
+    public boolean hasLibroConISBN(long isbn) {
 
         boolean libroTrovato = false;
 
@@ -113,7 +113,7 @@ public class LibroDAO {
      * @param isbn ISBN del libro da recuperare
      * @return Libro se trovato, null altrimenti
      */
-    public Libro getLibroByISBN(int isbn) {
+    public Libro getLibroByISBN(long isbn) {
 
         Libro libroTrovato = null;
 
