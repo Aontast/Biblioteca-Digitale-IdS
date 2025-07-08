@@ -267,11 +267,21 @@ public class FormRegistrazione extends JFrame {
                 }
 
                 // Se tutto va bene
-                JOptionPane.showMessageDialog(null,
-                        "I dati inseriti sono corretti... verifica in corso",
-                        "Attendere",
+                try {
+                    control.ControllerRegistrazione controller = new control.ControllerRegistrazione();
+                    controller.registraUtente(nomeInserito, cognomeInserito, emailInserita, passwordInserita);
+                    JOptionPane.showMessageDialog(null,
+                        "Registrazione completata con successo!",
+                        "Successo",
                         JOptionPane.INFORMATION_MESSAGE
-                );
+                    );
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,
+                        ex.getMessage(),
+                        "Errore registrazione",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
             }
         });
 
