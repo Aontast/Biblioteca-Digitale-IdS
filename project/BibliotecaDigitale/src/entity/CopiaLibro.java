@@ -1,7 +1,5 @@
 package entity;
 
-import database.LibroDAO;
-
 public class CopiaLibro {
 
     public enum StatoCopia {
