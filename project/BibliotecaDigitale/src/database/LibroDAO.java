@@ -133,11 +133,11 @@ public class LibroDAO {
                 );
             }
 
-            System.out.println("[searchLibroByISBN] Libro dal database recuperato");
+            System.out.println("[getLibroByISBN] Libro dal database recuperato");
             rs.close();
 
         } catch (SQLException | ClassNotFoundException e) {
-            System.err.println("[searchLibroByISBN] Libro dal database non recuperato: " + e.getMessage());
+            System.err.println("[getLibroByISBN] Libro dal database non recuperato: " + e.getMessage());
         }
 
         return libroTrovato;
