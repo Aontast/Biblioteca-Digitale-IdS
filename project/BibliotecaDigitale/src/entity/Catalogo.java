@@ -1,7 +1,6 @@
 package entity;
 
 import database.LibroDAO;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 
@@ -38,14 +37,14 @@ public class Catalogo {
         //Non implementato
     }
 
-    public void aggiungiLibro(Libro libro) throws SQLIntegrityConstraintViolationException{
+    public void aggiungiLibro(Libro libro) throws Exception {
         LibroDAO libroDAO = new LibroDAO();
-        if (!libroDAO.hasLibroConISBN(libro.getCodiceISBN())) {
-            // Salva il libro tramite il DAO
-            libroDAO.salvaLibro(libro);
-            
-        } else {
-            System.out.println("Il libro con ISBN " + libro.getCodiceISBN() + " è già presente nel catalogo.");
+        if (libroDAO.hasLibroConISBN(libro.getCodiceISBN())) {
+            throw new Exception("Il libro con ISBN " + libro.getCodiceISBN() + " è già presente nel catalogo.");
+        }
+        int result = libroDAO.salvaLibro(libro);
+        if (result <= 0) {
+            throw new Exception("Salvataggio del libro fallito per ISBN: " + libro.getCodiceISBN());
         }
     }
 
