@@ -22,29 +22,29 @@ public class Catalogo {
         return instance;
     }
 
-    public void mostraCatalogo(){
+    public List<Libro> mostraCatalogo(){
 
         // Istanzia un oggetto LibroDAO per interagire con il database
         // e recuperare la lista dei libri
         LibroDAO libroDAO = new LibroDAO();
-        List<Libro> listaLibri = libroDAO.getAllLibri();
-        for(Libro libro : listaLibri) {
-            System.out.println(libro);
-        }
+        return libroDAO.getAllLibri();
     }
 
     public void filtraCatalogo(){
         //Non implementato
     }
 
-    public void aggiungiLibro(Libro libro) throws Exception {
+    public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws Exception {
+        // Crea un nuovo oggetto Libro con i dati forniti
+        Libro libro = new Libro(codiceISBN, titolo, autore, annoDiPubblicazione, genere, descrizione);
+
         LibroDAO libroDAO = new LibroDAO();
-        if (libroDAO.hasLibroConISBN(libro.getCodiceISBN())) {
-            throw new Exception("Il libro con ISBN " + libro.getCodiceISBN() + " è già presente nel catalogo.");
+        if (libroDAO.hasLibroConISBN(codiceISBN)) {
+            throw new Exception("Il libro con ISBN " + codiceISBN + " è già presente nel catalogo.");
         }
         int result = libroDAO.salvaLibro(libro);
         if (result <= 0) {
-            throw new Exception("Salvataggio del libro fallito per ISBN: " + libro.getCodiceISBN());
+            throw new Exception("Salvataggio del libro fallito per ISBN: " + codiceISBN);
         }
     }
 
@@ -52,7 +52,7 @@ public class Catalogo {
         //Non implementato
     }
 
-    private Libro trovaLibro(int isbn){
+    private Libro trovaLibro(long isbn){
         LibroDAO libroDAO = new LibroDAO();
         if(libroDAO.hasLibroConISBN(isbn)){
             return libroDAO.getLibroByISBN(isbn);
