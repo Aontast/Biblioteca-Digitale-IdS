@@ -71,6 +71,7 @@ public class LibroDAO {
                 );
             }
             System.out.println("[getAllLibri] Libri del database recuperati");
+            rs.close();
 
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("[getAllLibri] Libri del database non recuperati: " + e.getMessage());
@@ -96,6 +97,7 @@ public class LibroDAO {
             }
 
             System.out.println("[searchLibroByISBN] Libro dal database cercato");
+            rs.close();
 
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("[searchLibroByISBN] Libro dal database non cercato: " + e.getMessage());
