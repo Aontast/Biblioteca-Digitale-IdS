@@ -1,22 +1,22 @@
 package entity;
 
 public class Prenotazione {
-    private int IDprenotazione;
+    private int IDPrenotazione;
     private int costoComplessivoPrestito;
     private String data; //VERIFICARE SE CAMBIARE IN DATE TRAMITE JAVA.TIME
 
     public Prenotazione(int IDprenotazione, int costoComplessivoPrestito, String data) {
-        this.IDprenotazione = IDprenotazione;
+        this.IDPrenotazione = IDprenotazione;
         this.costoComplessivoPrestito = costoComplessivoPrestito;
         this.data = data;
     }
 
     public int getIDprenotazione() {
-        return IDprenotazione;
+        return IDPrenotazione;
     }
 
     public void setIDprenotazione(int IDprenotazione) {
-        this.IDprenotazione = IDprenotazione;
+        this.IDPrenotazione = IDprenotazione;
     }
 
     public int getCostoComplessivoPrestito() {

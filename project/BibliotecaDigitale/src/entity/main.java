@@ -15,5 +15,9 @@ public class main {
         } catch (SQLIntegrityConstraintViolationException e) {
             System.err.println("Utente già registrato");
         }
+
+        String query = "SELECT * FROM utente WHERE Email = '" + utente.getEmail() + "'";
+        System.out.println(query);
+        System.out.println(utenteDAO.hasUtenteConEmail(utente.getEmail()));
     }
 }

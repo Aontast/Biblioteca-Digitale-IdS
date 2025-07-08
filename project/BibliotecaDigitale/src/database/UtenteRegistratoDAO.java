@@ -53,7 +53,7 @@ public class UtenteRegistratoDAO {
         UtenteRegistrato utenteTrovato = null;
 
         try {
-            String query = "SELECT * FROM utente WHERE Email = " + email;
+            String query = "SELECT * FROM utenti WHERE Email = '" + email + "'";
             ResultSet rs = DBConnectionManager.selectQuery(query);
             if (rs.next()) {
                 String nome = rs.getString("nome");
@@ -94,7 +94,7 @@ public class UtenteRegistratoDAO {
         boolean utenteTrovato = false;
 
         try {
-            String query = "SELECT * FROM utente WHERE Email = " + email;
+            String query = "SELECT * FROM utenti WHERE Email = '" + email + "'";
             ResultSet rs = DBConnectionManager.selectQuery(query);
             if (rs.next()) {
                 utenteTrovato = true;

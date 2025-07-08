@@ -60,4 +60,15 @@ public abstract class UtenteRegistrato {
     public void setLivelloPermesso(int livelloPermesso) {
         this.livelloPermesso = livelloPermesso;
     }
+
+    @Override
+    public String toString() {
+        return "UtenteRegistrato{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", livelloPermesso=" + livelloPermesso +
+                '}';
+    }
 }
