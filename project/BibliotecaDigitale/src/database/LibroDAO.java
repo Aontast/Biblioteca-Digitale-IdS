@@ -106,6 +106,12 @@ public class LibroDAO {
         return libroTrovato;
     }
 
+
+    /**
+     * Metodo per recuperare un libro dal database tramite il suo ISBN
+     * @param isbn ISBN del libro da recuperare
+     * @return Libro se trovato, null altrimenti
+     */
     public Libro getLibroByISBN(int isbn) {
 
         Libro libroTrovato = null;
