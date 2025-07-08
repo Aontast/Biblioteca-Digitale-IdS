@@ -236,7 +236,7 @@ public class UserInterfacePrenotazioneLibro extends JFrame {
 		lblImmagineProfilo.setBounds(417, 25, 172, 109);
 		
 		try {
-			ImageIcon iconaOriginale = new ImageIcon("/resources/profilo.png"); 
+			ImageIcon iconaOriginale = new ImageIcon("profilo.png"); 
 			
 			Image immagineRidimensionata = iconaOriginale.getImage().getScaledInstance(
 				lblImmagineProfilo.getWidth(), 
