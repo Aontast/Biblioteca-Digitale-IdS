@@ -9,14 +9,22 @@ import java.util.List;
 
 public class LibroDAO {
 
+    /**
+     * Costruttore della classe LibroDAO
+     */
     public LibroDAO() {
         super();
     }
 
+    /**
+     * Metodo per salvare un libro nel database
+     * @param libro Libro da salvare
+     * @return 0 se il salvataggio è andato a buon fine, -1 in caso contrario
+     */
     public int salvaLibro(Libro libro) {
 
         int result = 0;
-        String query = "INSERT INTO libri VALUES(%d,'%s','%s',%d,'%s','%s',%d)".formatted(
+        String query = "INSERT INTO libri VALUES(%d, '%s', '%s', %d, '%s', '%s', %d)".formatted(
                 libro.getCodiceISBN(),
                 libro.getTitolo(),
                 libro.getAutore(),
@@ -38,6 +46,10 @@ public class LibroDAO {
         return result;
     }
 
+    /**
+     * Metodo per recuperare tutti i libri dal database
+     * @return Lista di libri presenti nel database
+     */
     public List<Libro> getAllLibri() {
 
         List<Libro> listaLibri = new ArrayList<>();
@@ -51,10 +63,10 @@ public class LibroDAO {
                         rs.getInt("ISBN"),
                         rs.getString("TITOLO"),
                         rs.getString("AUTORE"),
-                        rs.getInt("ANNO DI PUBBLICAZIONE"),
+                        rs.getInt("ANNO_PUBBLICAZIONE"),
                         rs.getString("GENERE"),
                         rs.getString("DESCRIZIONE"),
-                        rs.getInt("NUMERO COPIE")
+                        rs.getInt("NUMERO_COPIE")
                         )
                 );
             }
@@ -67,6 +79,11 @@ public class LibroDAO {
         return listaLibri;
     }
 
+    /**
+     * Metodo per cercare un libro nel database tramite il suo ISBN
+     * @param isbn ISBN del libro da cercare
+     * @return true se il libro è stato trovato, false altrimenti
+     */
     public boolean searchLibroByISBN(int isbn) {
 
         boolean libroTrovato = false;

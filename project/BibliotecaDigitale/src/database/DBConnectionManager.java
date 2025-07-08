@@ -37,7 +37,7 @@ public class DBConnectionManager {
         }
     }
 
-    //query result
+    //metodi per eseguire query    
     public static ResultSet selectQuery(String query) throws ClassNotFoundException, SQLException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
