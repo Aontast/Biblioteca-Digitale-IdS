@@ -14,7 +14,7 @@ public class PrenotazioneDAO {
     public int salvaPrenotazione(Prenotazione prenotazione) throws SQLIntegrityConstraintViolationException {
 
         int result;
-        String query = "INSERT INTO prenotazione (DataConsegna, Costo, Copia, Utente) VALUES('%s', %d)".formatted(
+        /*String query = "INSERT INTO prenotazione (DataConsegna, Costo, Copia, Utente) VALUES('%s', %d)".formatted(
                 prenotazione.getDataConsegna(),
                 prenotazione.getCostoPrestito()
                 prenotazione.getCopia(),
@@ -30,7 +30,7 @@ public class PrenotazioneDAO {
             System.err.println("[salvaCopiaLibro] Copia non salvata nel database: " + e.getMessage());
             result = -1;
         }
-
-        return result;
+        */
+        return 0;
     }
 }

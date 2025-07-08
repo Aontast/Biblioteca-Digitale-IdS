@@ -1,12 +1,12 @@
 package control;
 
-import entity.sistemaAutenticazione;
+import entity.SistemaAutenticazione;
 
 public class ControllerRegistrazione {
 
     public void registraUtente(String nome, String cognome, String email, String password) throws Exception {
         // Istanzia il sistema di autenticazione
-        sistemaAutenticazione sistemaAut = sistemaAutenticazione.getInstance();
+        SistemaAutenticazione sistemaAut = SistemaAutenticazione.getInstance();
         
         //dati gia verificati di validità nel boundary
         //verificheremo la presenza di un utente con la stessa email nell'entity

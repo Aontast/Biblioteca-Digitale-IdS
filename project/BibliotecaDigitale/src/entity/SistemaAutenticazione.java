@@ -2,16 +2,16 @@ package entity;
 
 import database.UtenteRegistratoDAO;
 
-public class sistemaAutenticazione {
+public class SistemaAutenticazione {
 
     // Singleton pattern
-    private static sistemaAutenticazione instance = null;
-    private sistemaAutenticazione() {
+    private static SistemaAutenticazione instance = null;
+    private SistemaAutenticazione() {
         super();
     }
-    public static synchronized sistemaAutenticazione getInstance() {
+    public static synchronized SistemaAutenticazione getInstance() {
         if (instance == null) {
-            instance = new sistemaAutenticazione();
+            instance = new SistemaAutenticazione();
         }
         return instance;
     }

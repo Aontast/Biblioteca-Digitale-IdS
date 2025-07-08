@@ -19,6 +19,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import control.ControllerRegistrazione;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -268,7 +269,7 @@ public class FormRegistrazione extends JFrame {
 
                 // Se tutto va bene
                 try {
-                    control.ControllerRegistrazione controller = new control.ControllerRegistrazione();
+                    ControllerRegistrazione controller = new ControllerRegistrazione();
                     controller.registraUtente(nomeInserito, cognomeInserito, emailInserita, passwordInserita);
                     JOptionPane.showMessageDialog(null,
                         "Registrazione completata con successo!",
