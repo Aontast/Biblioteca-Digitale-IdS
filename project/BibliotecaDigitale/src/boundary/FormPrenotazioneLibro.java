@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class UserInterfacePrenotazioneLibro extends JFrame {
+public class FormPrenotazioneLibro extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -43,7 +43,7 @@ public class UserInterfacePrenotazioneLibro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserInterfacePrenotazioneLibro frame = new UserInterfacePrenotazioneLibro();
+					FormPrenotazioneLibro frame = new FormPrenotazioneLibro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class UserInterfacePrenotazioneLibro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserInterfacePrenotazioneLibro() {
+	public FormPrenotazioneLibro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 634, 496);
 		contentPane = new JPanel();
