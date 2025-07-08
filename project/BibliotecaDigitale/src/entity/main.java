@@ -19,7 +19,8 @@ public class main {
             System.out.println(libro);
         }
 
-        System.out.println(libroDAO.searchLibroByISBN(3));
+        System.out.println(libroDAO.hasLibroConISBN(3));
+        System.out.println(libroDAO.getLibroByISBN(3));
         
 
     }
