@@ -236,10 +236,8 @@ public class UserInterfacePrenotazioneLibro extends JFrame {
 		lblImmagineProfilo.setBounds(417, 25, 172, 109);
 		
 		try {
-			// Carica l'immagine dal percorso specificato
-			ImageIcon iconaOriginale = new ImageIcon("profilo.png"); // Sostituisci con il percorso della tua immagine
+			ImageIcon iconaOriginale = new ImageIcon("/resources/profilo.png"); 
 			
-			// Ridimensiona l'immagine per adattarla al label
 			Image immagineRidimensionata = iconaOriginale.getImage().getScaledInstance(
 				lblImmagineProfilo.getWidth(), 
 				lblImmagineProfilo.getHeight(), 

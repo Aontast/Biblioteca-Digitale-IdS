@@ -60,7 +60,7 @@ public class FormRegistrazione extends JFrame {
     public FormRegistrazione() {
         // Carica l'immagine di background
         try {
-            backgroundImage = Toolkit.getDefaultToolkit().getImage("background.jpg");
+            backgroundImage = Toolkit.getDefaultToolkit().getImage("/resources/background.jpg");
         } catch (Exception e) {
             System.out.println("Errore caricamento immagine: " + e.getMessage());
         }
