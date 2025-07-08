@@ -13,7 +13,6 @@ public class Libro {
     private String descrizione;
 
     private int numeroCopieTotali;
-    List<CopiaLibro> listaCopie;
 
     public Libro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) {
         this.codiceISBN = codiceISBN;
@@ -23,9 +22,10 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = 0;
-        this.listaCopie = new ArrayList<>();
     }
 
+    //costruttore per quando viene prelevato un libro da database
+    //in questo caso il numero di copie totali è già stato inserito nel database
     public Libro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione, int numeroCopieTotali) {
         this.codiceISBN = codiceISBN;
         this.titolo = titolo;
@@ -34,13 +34,10 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = numeroCopieTotali;
-        this.listaCopie = new ArrayList<>();
     }
 
     public void aggiungiCopia() {
-        CopiaLibro copia = new CopiaLibro(this);
-        listaCopie.add(copia);
-        this.numeroCopieTotali++;
+        // aggiunge una nuova copia
     }
 
     public int getnumeroCopieTotali() {
@@ -69,10 +66,6 @@ public class Libro {
 
     public String getTitolo() {
         return titolo;
-    }
-
-    public List<CopiaLibro> getListaCopie() {
-        return listaCopie;
     }
 
     public void setTitolo(String titolo) {
@@ -120,17 +113,6 @@ public class Libro {
         return false;
     }*/
 
-    public int numeroCopieDisponibili(){
-        int numeroCopieDisponibili = 0;
-
-        for(CopiaLibro copia: listaCopie){
-            if (copia.isDisponibile()) {
-                numeroCopieDisponibili++;
-            }
-        }
-
-        return numeroCopieDisponibili;
-    }
 
     @Override
     public String toString() {
@@ -142,7 +124,6 @@ public class Libro {
                 ", codiceISBN=" + codiceISBN +
                 ", descrizione='" + descrizione + '\'' +
                 ", numeroCopieTotali=" + numeroCopieTotali +
-                ", listaCopie=" + listaCopie +
                 '}';
     }
 }
