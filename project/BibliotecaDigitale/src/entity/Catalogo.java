@@ -22,15 +22,12 @@ public class Catalogo {
         return instance;
     }
 
-    public void mostraCatalogo(){
+    public List<Libro> mostraCatalogo(){
 
         // Istanzia un oggetto LibroDAO per interagire con il database
         // e recuperare la lista dei libri
         LibroDAO libroDAO = new LibroDAO();
-        List<Libro> listaLibri = libroDAO.getAllLibri();
-        for(Libro libro : listaLibri) {
-            System.out.println(libro);
-        }
+        return libroDAO.getAllLibri();
     }
 
     public void filtraCatalogo(){
