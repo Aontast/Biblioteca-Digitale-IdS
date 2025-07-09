@@ -391,14 +391,15 @@ public class FormPrenotazioneLibro extends JFrame {
 		panelPrenotazione.add(txtData);
 		txtData.setColumns(10);
 
-		JButton btnConferma = new JButton("Prenota");
+		JButton btnConferma = new JButton("Conferma prenotazione");
 		btnConferma.setBackground(Color.LIGHT_GRAY);
+
 		btnConferma.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 				String dataRest = txtData.getText();
 				Date inputDate;
 
-				// Recupera il libro selezionato
+				// Validation
 		        String libroSelezionato = null;
 		        for (JRadioButton rb : radioButtons) {
 		            if (rb.isSelected()) {
@@ -407,21 +408,23 @@ public class FormPrenotazioneLibro extends JFrame {
 		            }
 		        }
 
+				//Se l'utente non seleziona i campi
 		        if (libroSelezionato == null || dataRest.isEmpty()) {
 		            JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
 		            return;
 		        }
 
+				//Se l'utente scrive una data con un formato non supportato
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				sdf.setLenient(false);
 				try {
             		inputDate = sdf.parse(dataRest);
         		} catch (ParseException e1) {
-           		 	//return false; // Formato errato o data non valida
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data del tipo DD/MM/YYYY valida.","Errore formato data", JOptionPane.ERROR_MESSAGE);
 					return;
        			}
 
+				//Se l'utente inserisce una data già passata
 				if(!ControllerPrenotazione.futureDateCheck(inputDate)) {
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
 					return;
