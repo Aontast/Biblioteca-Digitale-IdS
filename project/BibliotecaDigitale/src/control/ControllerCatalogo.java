@@ -3,13 +3,25 @@ package control;
 import DTO.LibroDTO;
 import entity.Catalogo;
 import entity.Libro;
-
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerCatalogo {
+
+    private static ControllerCatalogo instance = null;
+    private ControllerCatalogo() {
+        super();
+    }
+
+    // Costruttore Singleton ControllerCatalogo, non chiama costruttore chiama metodo che istanzia l'oggetto ControllerCatalogo
+    // Se l'istanza non esiste, la crea, altrimenti restituisce l'istanza esistente
+    public static synchronized ControllerCatalogo getInstance() {
+        if (instance == null) {
+            instance = new ControllerCatalogo();
+        }
+        return instance;
+    }
 
     public List<Libro> getLibriDisponibili() {
 

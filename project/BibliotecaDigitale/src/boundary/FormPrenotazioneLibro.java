@@ -310,7 +310,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		    }
 		});
 		
-		ControllerCatalogo controllerC = new ControllerCatalogo();
+		ControllerCatalogo controllerC = ControllerCatalogo.getInstance();
 		List<LibroDTO> libri = controllerC.mostraLibriDisponibili();
 		
 		ButtonGroup gruppoLibri = new ButtonGroup();

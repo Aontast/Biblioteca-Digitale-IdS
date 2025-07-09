@@ -1,6 +1,8 @@
 package boundary;
 
+import control.ControllerCatalogo;
 import java.awt.*;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -267,7 +269,23 @@ public class FormInserimentoLibro extends JFrame {
             }
 
             // Tutti i dati sono validi
-            JOptionPane.showMessageDialog(this, "Funzione non implementata!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            ControllerCatalogo controllerC = ControllerCatalogo.getInstance();
+
+            try {
+                controllerC.aggiungiLibro(Long.parseLong(isbn), titolo, autore, annoInt, genere, descrizione);
+                JOptionPane.showMessageDialog(this, "Libro inserito con successo!", "Successo", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                new FormGestioneCatalogo().setVisible(true);
+            } catch (SQLIntegrityConstraintViolationException ex) {
+                JOptionPane.showMessageDialog(this, "Errore durante l'inserimento del libro: " + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
+            }catch (Exception ex){  //errore generico
+                JOptionPane.showMessageDialog(null,
+                        "Si è verificato un errore durante la registrazione: " + ex.getMessage(),
+                        "Errore",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+            }
+            
         });
     }
 
