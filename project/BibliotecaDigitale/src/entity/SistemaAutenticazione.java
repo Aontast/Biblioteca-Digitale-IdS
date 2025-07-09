@@ -1,7 +1,6 @@
 package entity;
 
 import database.UtenteRegistratoDAO;
-
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class SistemaAutenticazione {
@@ -25,12 +24,10 @@ public class SistemaAutenticazione {
         UtenteRegistrato utente = new Cliente(nome, cognome, email, password);
         UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
 
-        try {
-            utenteDAO.salvaUtente(utente);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            System.err.println("Account con email "+ email+ " già presente");
-            throw e;
-        }
+        utenteDAO.salvaUtente(utente);
+        // Questo potrebbe propagare un'eccezione SQLIntegrityConstraintViolationException
+        // se l'utente con la stessa email esiste già nel database, noi lo propaghiamo al chiamante
+        // in modo tale che si possa visualizzare un messaggio di errore
     }
 
     public void accessoProfiloUtente(){

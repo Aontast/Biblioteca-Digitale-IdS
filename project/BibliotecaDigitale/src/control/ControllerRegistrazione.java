@@ -1,7 +1,6 @@
 package control;
 
 import entity.SistemaAutenticazione;
-
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class ControllerRegistrazione {

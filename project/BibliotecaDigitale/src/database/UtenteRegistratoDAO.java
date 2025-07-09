@@ -32,7 +32,7 @@ public class UtenteRegistratoDAO {
             System.out.println("[salvaUtente] Utente Salvato con successo nel database");
 
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw e;
+            throw new SQLIntegrityConstraintViolationException("Questa mail è gia registrata nel database.", e);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("[salvaUtente] Utente non salvato nel database: " + e.getMessage());
             result = -1;
