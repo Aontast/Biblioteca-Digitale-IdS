@@ -9,6 +9,9 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import control.ControllerPrenotazione;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,7 +21,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -389,9 +395,10 @@ public class FormPrenotazioneLibro extends JFrame {
 		btnConferma.setBackground(Color.LIGHT_GRAY);
 		btnConferma.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        String dataRest = txtData.getText();
+				String dataRest = txtData.getText();
+				Date inputDate;
 
-		        // Recupera il libro selezionato
+				// Recupera il libro selezionato
 		        String libroSelezionato = null;
 		        for (JRadioButton rb : radioButtons) {
 		            if (rb.isSelected()) {
@@ -401,9 +408,24 @@ public class FormPrenotazioneLibro extends JFrame {
 		        }
 
 		        if (libroSelezionato == null || dataRest.isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.");
+		            JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
 		            return;
 		        }
+
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				sdf.setLenient(false);
+				try {
+            		inputDate = sdf.parse(dataRest);
+        		} catch (ParseException e1) {
+           		 	//return false; // Formato errato o data non valida
+					JOptionPane.showMessageDialog(null, "Per favore inserire una data del tipo DD/MM/YYYY valida.","Errore formato data", JOptionPane.ERROR_MESSAGE);
+					return;
+       			}
+
+				if(!ControllerPrenotazione.futureDateCheck(inputDate)) {
+					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 
 		        // Simula i dati ricevuti dal DB
 		        int idPrenotazione = (int)(Math.random() * 100000);
