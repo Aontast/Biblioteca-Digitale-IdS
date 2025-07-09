@@ -51,7 +51,7 @@ public class FormRicevuta extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
 
         // Titolo grande e centrato
-        JLabel titoloLabel = new JLabel("📚 Ricevuta Prenotazione 📖");
+        JLabel titoloLabel = new JLabel(" Ricevuta Prenotazione ");
         titoloLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
         titoloLabel.setForeground(new Color(30, 30, 30));
         titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
