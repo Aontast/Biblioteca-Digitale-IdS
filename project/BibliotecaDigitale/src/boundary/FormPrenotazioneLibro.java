@@ -74,7 +74,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		
 		// Carica l'immagine di background
         try {
-            backgroundImage = new ImageIcon(getClass().getResource("/resources/17973903.jpg")).getImage();
+            backgroundImage = new ImageIcon(getClass().getResource("/resources/login_background.jpg")).getImage();
 			// Ridimensiona l'immagine per adattarla alla finestra
 			backgroundImage = backgroundImage.getScaledInstance(
 				Toolkit.getDefaultToolkit().getScreenSize().width, 
@@ -86,7 +86,7 @@ public class FormPrenotazioneLibro extends JFrame {
         }
 		
         try {
-            Image icon = new ImageIcon(getClass().getResource("/resources/login_background.jpg")).getImage();
+            Image icon = new ImageIcon(getClass().getResource("/resources/iconaApp.jpg")).getImage();
             setIconImage(icon);
         } catch (Exception e) {
             System.out.println("Errore caricamento icona: " + e.getMessage());
