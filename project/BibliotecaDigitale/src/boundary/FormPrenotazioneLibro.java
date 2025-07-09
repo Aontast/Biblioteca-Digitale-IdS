@@ -390,12 +390,17 @@ public class FormPrenotazioneLibro extends JFrame {
 				// Simula i dati ricevuti dal DB
 				int idPrenotazione = (int)(Math.random() * 100000);
 
-				String emailUtente = txtMatteoingswcom.getText();
-
 				//Calcolo del costo totale tramite controller
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 				
-				FormRicevuta ricevutaFrame = new FormRicevuta(idPrenotazione, libroSelezionato.getTitolo(), libroSelezionato.getCodiceISBN(), emailUtente, dataRest, costoTotale);
+				FormRicevuta ricevutaFrame = new FormRicevuta(
+						idPrenotazione,
+						libroSelezionato.getTitolo(),
+						libroSelezionato.getCodiceISBN(),
+						txtMatteoingswcom.getText(),
+						dataRest,
+						costoTotale
+				);
 				ricevutaFrame.setVisible(true);
 
 				// Cambia pannello
