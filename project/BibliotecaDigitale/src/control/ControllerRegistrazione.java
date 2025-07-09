@@ -6,6 +6,22 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 public class ControllerRegistrazione {
 
+    private static ControllerRegistrazione instance = null;
+
+    private ControllerRegistrazione(){
+        super();
+    }
+
+    // Costruttore Singleton Catalogo, non chiama costruttore chiama metodo che istanzia l'oggetto Catalogo
+    // Se l'istanza non esiste, la crea, altrimenti restituisce l'istanza esistente
+    // In questo modo si garantisce che ci sia una sola istanza di Catalogo in tutto il programma
+    public static synchronized ControllerRegistrazione getInstance() {
+        if (instance == null) {
+            instance = new ControllerRegistrazione();
+        }
+        return instance;
+    }
+
     public void registraUtente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException {
         // Istanzia il sistema di autenticazione
         SistemaAutenticazione sistemaAut = SistemaAutenticazione.getInstance();
