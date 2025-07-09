@@ -278,7 +278,7 @@ public class FormRegistrazione extends JFrame {
 
                 // Se tutto va bene
                 try {
-                    ControllerRegistrazione controller = new ControllerRegistrazione();
+                    ControllerRegistrazione controller = ControllerRegistrazione.getInstance();
                     controller.registraUtente(nomeInserito, cognomeInserito, emailInserita, passwordInserita);
                     JOptionPane.showMessageDialog(null,
                         "Registrazione completata con successo!",
