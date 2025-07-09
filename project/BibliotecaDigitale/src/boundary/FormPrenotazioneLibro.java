@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DTO.LibroDTO;
 import control.ControllerPrenotazione;
 
 import javax.swing.ButtonGroup;
@@ -358,7 +359,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		});
 		
 		ControllerCatalogo controllerC = new ControllerCatalogo();
-		List<String> libri = controllerC.getLibriDisponibili();
+		List<LibroDTO> libri = controllerC.mostraLibriDisponibili();
 		
 		ButtonGroup gruppoLibri = new ButtonGroup();
 
@@ -430,8 +431,11 @@ public class FormPrenotazioneLibro extends JFrame {
 					return;
 				}
 
+
 		        // Simula i dati ricevuti dal DB
 		        int idPrenotazione = (int)(Math.random() * 100000);
+
+
 		        String[] parts = libroSelezionato.split("\\|");
 		        String titolo = parts[0].trim();
 		        String isbn = parts[2].trim();
@@ -454,7 +458,10 @@ public class FormPrenotazioneLibro extends JFrame {
 
 		        // Mostra dialogo di conferma
 		        JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
-		    }
+				
+				//FormRicevuta(String IDPrenotazione, String titolo, String ISBN, String email, String data, double prezzo);
+				//ricevutaFrame.setVisible(true);
+			}
 		});
 		
 		btnConferma.setBounds(460, y + 50, 100, 25);

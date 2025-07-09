@@ -11,7 +11,7 @@ public class ControllerPrenotazione {
     }
 
     public static double calcolaPrezzo(Date previstaRestituzione){
-        double prezzo = 1.5;
+        double prezzo = 0.25;
         Date oggi = new Date();
 
         long diffInMillisecondi = previstaRestituzione.getTime() - oggi.getTime();
@@ -19,5 +19,9 @@ public class ControllerPrenotazione {
 
         double costoTotale = giorni * prezzo;
         return costoTotale;
+    }
+
+    public void prenotaLibroDisponibile(){
+
     }
 }
