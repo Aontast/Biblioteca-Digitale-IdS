@@ -26,6 +26,7 @@ public class main {
         copia.setID(2);
         Prenotazione prenotazione = new Prenotazione("10/12", 32.3, copia, utente);
         System.out.println(copia.getID() + utente.getEmail());
+        System.out.println("ciao");
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
         try {
