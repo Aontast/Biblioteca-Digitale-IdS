@@ -16,6 +16,7 @@ public class FormRicevuta extends JFrame{
     private Image backgroundImage;
 
     public FormRicevuta(int IDPrenotazione, String titolo, long ISBN, String email, String data, double prezzo) {
+
         try {
             backgroundImage = new ImageIcon(getClass().getResource("/resources/backgroundRicevuta.jpg")).getImage();
 			// Ridimensiona l'immagine per adattarla alla finestra
