@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -31,8 +30,6 @@ import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import java.awt.Font;
-import java.awt.Graphics2D;
 
 public class FormPrenotazioneLibro extends JFrame {
 
@@ -79,6 +76,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		// Carica l'immagine di background
         try {
             backgroundImage = new ImageIcon(getClass().getResource("/resources/login_background.jpg")).getImage();
+			// Ridimensiona l'immagine per adattarla alla finestra
 			backgroundImage = backgroundImage.getScaledInstance(
 				Toolkit.getDefaultToolkit().getScreenSize().width, 
 				Toolkit.getDefaultToolkit().getScreenSize().height, 
@@ -101,151 +99,130 @@ public class FormPrenotazioneLibro extends JFrame {
                 super.paintComponent(g);
                 if (backgroundImage != null) {
                     g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-                    // Overlay bianco trasparente per migliorare la leggibilità
-                    Graphics2D g2d = (Graphics2D) g.create();
-                    g2d.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.70f));
-                    g2d.setColor(new Color(255,255,255,230));
-                    g2d.fillRoundRect(15, 15, getWidth() - 30, getHeight() - 30, 40, 40);
-                    g2d.dispose();
                 }
             }
         };
-		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		// Cambia font e colori delle label e dei campi
-		Font labelFont = new Font("Segoe UI", Font.BOLD, 16);
-		Font fieldFont = new Font("Segoe UI", Font.PLAIN, 15);
-		Color labelColor = new Color(44, 62, 80);
-
+		
 		JLabel lblNewLabel = new JLabel("Nome");
-		lblNewLabel.setFont(labelFont);
-		lblNewLabel.setForeground(labelColor);
-		lblNewLabel.setBounds(38, 40, 80, 18);
+		lblNewLabel.setForeground(new Color(192, 192, 192));
+		lblNewLabel.setBackground(new Color(192, 192, 192));
+		lblNewLabel.setBounds(38, 40, 45, 13);
 		contentPane.add(lblNewLabel);
-
+		
 		JLabel lblNewLabel_1 = new JLabel("Cognome");
-		lblNewLabel_1.setFont(labelFont);
-		lblNewLabel_1.setForeground(labelColor);
-		lblNewLabel_1.setBounds(38, 100, 98, 18);
+		lblNewLabel_1.setForeground(new Color(192, 192, 192));
+		lblNewLabel_1.setBounds(38, 100, 98, 13);
 		contentPane.add(lblNewLabel_1);
-
+		
 		JLabel lblNewLabel_2 = new JLabel("Email");
-		lblNewLabel_2.setFont(labelFont);
-		lblNewLabel_2.setForeground(labelColor);
-		lblNewLabel_2.setBounds(38, 160, 80, 18);
+		lblNewLabel_2.setForeground(new Color(192, 192, 192));
+		lblNewLabel_2.setBounds(38, 160, 45, 13);
 		contentPane.add(lblNewLabel_2);
-
+		
 		txtMatteo = new JTextField();
-		txtMatteo.setFont(fieldFont);
-		txtMatteo.setForeground(new Color(52, 73, 94));
-		txtMatteo.setBackground(new Color(236, 240, 241));
-		txtMatteo.setBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1));
+		txtMatteo.setForeground(SystemColor.menu);
+		txtMatteo.setBackground(SystemColor.activeCaptionText);
 		txtMatteo.setEditable(false);
 		txtMatteo.setText("Matteo");
-		txtMatteo.setBounds(38, 57, 151, 28);
+		txtMatteo.setBounds(38, 57, 151, 25);
 		contentPane.add(txtMatteo);
-
+		txtMatteo.setColumns(10);
+		
 		txtBottari = new JTextField();
-		txtBottari.setFont(fieldFont);
-		txtBottari.setForeground(new Color(52, 73, 94));
-		txtBottari.setBackground(new Color(236, 240, 241));
-		txtBottari.setBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1));
+		txtBottari.setForeground(SystemColor.menu);
+		txtBottari.setBackground(SystemColor.activeCaptionText);
 		txtBottari.setEditable(false);
 		txtBottari.setText("Bottari");
-		txtBottari.setBounds(38, 117, 151, 28);
+		txtBottari.setBounds(38, 117, 151, 25);
 		contentPane.add(txtBottari);
-
+		txtBottari.setColumns(10);
+		
 		txtMatteoingswcom = new JTextField();
-		txtMatteoingswcom.setFont(fieldFont);
-		txtMatteoingswcom.setForeground(new Color(52, 73, 94));
-		txtMatteoingswcom.setBackground(new Color(236, 240, 241));
-		txtMatteoingswcom.setBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1));
+		txtMatteoingswcom.setForeground(SystemColor.menu);
+		txtMatteoingswcom.setBackground(SystemColor.activeCaptionText);
 		txtMatteoingswcom.setEditable(false);
 		txtMatteoingswcom.setText("matteo@ingSW.it");
-		txtMatteoingswcom.setBounds(38, 177, 151, 28);
+		txtMatteoingswcom.setBounds(38, 177, 151, 25);
 		contentPane.add(txtMatteoingswcom);
-
+		txtMatteoingswcom.setColumns(10);
+		
 		txtPassword = new JPasswordField();
-		txtPassword.setFont(fieldFont);
-		txtPassword.setForeground(new Color(52, 73, 94));
-		txtPassword.setBackground(new Color(236, 240, 241));
-		txtPassword.setBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1));
+		txtPassword.setForeground(SystemColor.menu);
+		txtPassword.setBackground(SystemColor.activeCaptionText);
 		txtPassword.setEditable(false);
 		txtPassword.setToolTipText("");
-		txtPassword.setBounds(38, 237, 151, 28);
+		txtPassword.setBounds(38, 237, 151, 25);
 		txtPassword.setEchoChar('•');
 		contentPane.add(txtPassword);
 		txtPassword.setText("Swing_1");
-
+		
+		
 		JButton btnMostraPassword = new JButton("👁");
-		btnMostraPassword.setBackground(new Color(52, 152, 219));
-		btnMostraPassword.setForeground(Color.WHITE);
-		btnMostraPassword.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		btnMostraPassword.setBounds(199, 237, 70, 28);
+		btnMostraPassword.setBackground(Color.LIGHT_GRAY);
+		btnMostraPassword.setBounds(199, 237, 70, 25);
 		contentPane.add(btnMostraPassword);
 		btnMostraPassword.addActionListener(new ActionListener() {
 		    private boolean visibile = false;
+
 		    public void actionPerformed(ActionEvent e) {
 		        if (visibile) {
-		            txtPassword.setEchoChar('•');
+		            txtPassword.setEchoChar('•');  // Oscura password
 		            btnMostraPassword.setText("👁");
 		        } else {
-		            txtPassword.setEchoChar((char) 0);
+		            txtPassword.setEchoChar((char) 0);  // Mostra password
 		            btnMostraPassword.setText("🚫");
 		        }
 		        visibile = !visibile;
 		    }
 		});
-
+		
 		JLabel lblNewLabel_3 = new JLabel("Password");
-		lblNewLabel_3.setFont(labelFont);
-		lblNewLabel_3.setForeground(labelColor);
-		lblNewLabel_3.setBounds(38, 220, 98, 18);
+		lblNewLabel_3.setForeground(new Color(192, 192, 192));
+		lblNewLabel_3.setBounds(38, 220, 98, 13);
 		contentPane.add(lblNewLabel_3);
-
+		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setOpaque(false);
 		panelMenu.setVisible(false);
 		panelMenu.setBounds(396, 221, 224, 188);
-		panelMenu.setLayout(null);
 		contentPane.add(panelMenu);
-
+		panelMenu.setLayout(null);
+		
 		btnNewButton_1 = new JButton("Elenco Libri Prenotati");
-		btnNewButton_1.setBackground(new Color(46, 204, 113));
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton_1.setBounds(10, 10, 204, 28);
-		panelMenu.add(btnNewButton_1);
+		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Funzione ancora non disponibile!", "Work In Progress", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
+		btnNewButton_1.setBounds(10, 10, 204, 21);
+		panelMenu.add(btnNewButton_1);
+		
 		btnNewButton_2 = new JButton("Cronologia Prenotazioni");
-		btnNewButton_2.setBackground(new Color(241, 196, 15));
-		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton_2.setBounds(10, 60, 204, 28);
-		panelMenu.add(btnNewButton_2);
+		btnNewButton_2.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Funzione ancora non disponibile!", "Work In Progress", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
+		btnNewButton_2.setBounds(10, 60, 204, 21);
+		panelMenu.add(btnNewButton_2);
+		
+		JPanel panelPrenotazione = new JPanel();
+		panelPrenotazione.setBackground(new Color(0, 0, 0, 215)); // semi-trasparente
+		panelPrenotazione.setVisible(false);  // all'avvio nascosto
+		panelPrenotazione.setBounds(10, 10, 600, 430);  // sovrapposto a contentPane
+		panelPrenotazione.setLayout(null);
+		
 		btnNewButton_3 = new JButton("Effettua Prenotazione");
-		btnNewButton_3.setBackground(new Color(52, 152, 219));
-		btnNewButton_3.setForeground(Color.WHITE);
-		btnNewButton_3.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton_3.setBounds(10, 110, 204, 28);
-		panelMenu.add(btnNewButton_3);
+		btnNewButton_3.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelMenu.setVisible(false);
+				panelMenu.setVisible(false);       // nasconde tutto il contentPane e i bottoni del content pane
 				lblNewLabel.setVisible(false);
 				lblNewLabel_1.setVisible(false);
 				lblNewLabel_2.setVisible(false);
@@ -259,137 +236,203 @@ public class FormPrenotazioneLibro extends JFrame {
 				btnNewButton_5.setVisible(false); 
 				btnNewButton.setVisible(false); 
 				btnMenu.setVisible(false);
-		        panelPrenotazione.setVisible(true);
+				
+				
+		        panelPrenotazione.setVisible(true);  // mostra solo la prenotazione
 			}
 		});
-
+		
+		btnNewButton_3.setBounds(10, 110, 204, 21);
+		panelMenu.add(btnNewButton_3);
+		
 		btnNewButton_4 = new JButton("Gestisci Prenotazioni");
-		btnNewButton_4.setBackground(new Color(231, 76, 60));
-		btnNewButton_4.setForeground(Color.WHITE);
-		btnNewButton_4.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton_4.setBounds(10, 160, 204, 28);
-		panelMenu.add(btnNewButton_4);
+		btnNewButton_4.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Funzione ancora non disponibile!", "Work In Progress", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
+		btnNewButton_4.setBounds(10, 160, 204, 21);
+		panelMenu.add(btnNewButton_4);
+		
 		lblImmagineProfilo = new JLabel();
 		lblImmagineProfilo.setBounds(417, 25, 172, 109);
+		
 		try {
 			ImageIcon iconaOriginale = new ImageIcon(getClass().getResource("/resources/profilo.png"));
+			
 			Image immagineRidimensionata = iconaOriginale.getImage().getScaledInstance(
 				lblImmagineProfilo.getWidth(), 
 				lblImmagineProfilo.getHeight(), 
 				Image.SCALE_SMOOTH
 			);
+			
+			// Imposta l'icona ridimensionata
 			lblImmagineProfilo.setIcon(new ImageIcon(immagineRidimensionata));
+			
 		} catch (Exception ex) {
+			// Se l'immagine non può essere caricata, mostra un testo di fallback
 			lblImmagineProfilo.setText("Foto Profilo");
 			lblImmagineProfilo.setHorizontalAlignment(JLabel.CENTER);
 			lblImmagineProfilo.setVerticalAlignment(JLabel.CENTER);
 			System.err.println("Errore nel caricamento dell'immagine: " + ex.getMessage());
 		}
+		
 		contentPane.add(lblImmagineProfilo);
-
+		
 		btnMenu = new JButton("☰☰☰ Menu a tendina ☰☰☰");
-		btnMenu.setBackground(new Color(52, 73, 94));
-		btnMenu.setForeground(Color.WHITE);
-		btnMenu.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		btnMenu.setBounds(406, 419, 204, 28);
+		btnMenu.setBackground(Color.LIGHT_GRAY);
+		btnMenu.setBounds(406, 419, 204, 21);
 		contentPane.add(btnMenu);
-		btnMenu.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        panelMenu.setVisible(!panelMenu.isVisible());
-		    }
-		});
-
+		
 		btnNewButton = new JButton("✎ Modifica i dati personali ✎");
-		btnNewButton.setBackground(new Color(155, 89, 182));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton.setBounds(38, 293, 229, 28);
-		contentPane.add(btnNewButton);
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Funzione ancora non disponibile!", "Work In Progress", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
+		btnNewButton.setBounds(38, 293, 229, 23);
+		contentPane.add(btnNewButton);
+		
 		btnNewButton_5 = new JButton("✎ Modifica immagine profilo✎");
-		btnNewButton_5.setBackground(new Color(26, 188, 156));
-		btnNewButton_5.setForeground(Color.WHITE);
-		btnNewButton_5.setFont(new Font("Segoe UI", Font.BOLD, 13));
-		btnNewButton_5.setBounds(396, 144, 224, 28);
-		contentPane.add(btnNewButton_5);
+		btnNewButton_5.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Funzione ancora non disponibile!", "Work In Progress", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
+		btnNewButton_5.setBounds(396, 144, 224, 21);
+		contentPane.add(btnNewButton_5);
+		btnMenu.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        panelMenu.setVisible(!panelMenu.isVisible());
+		    }
+		});
+		
 		ControllerCatalogo controllerC = new ControllerCatalogo();
 		List<LibroDTO> libri = controllerC.mostraLibriDisponibili();
-
+		
 		ButtonGroup gruppoLibri = new ButtonGroup();
 
 		int y = 20;
 		JLabel labelIstruzioni = new JLabel("Seleziona un libro disponibile:");
-		labelIstruzioni.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		labelIstruzioni.setForeground(new Color(41, 128, 185));
-		labelIstruzioni.setBounds(10, y, 350, 22);
+		labelIstruzioni.setBackground(Color.LIGHT_GRAY);
+		labelIstruzioni.setForeground(Color.LIGHT_GRAY);
+		labelIstruzioni.setBounds(10, y, 300, 20);
 		panelPrenotazione.add(labelIstruzioni);
-		y += 34;
+		y += 30;
 
 		JRadioButton[] radioButtons = new JRadioButton[libri.size()];
 
 		for (int i = 0; i < libri.size(); i++) {
 		    radioButtons[i] = new JRadioButton(libri.get(i).toString());
-		    radioButtons[i].setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		    radioButtons[i].setForeground(new Color(52, 73, 94));
-		    radioButtons[i].setBackground(new Color(255,255,255,0));
-		    radioButtons[i].setBounds(10, y, 500, 24);
+		    radioButtons[i].setBounds(10, y, 500, 20);
 		    panelPrenotazione.add(radioButtons[i]);
 		    gruppoLibri.add(radioButtons[i]);
-		    y += 28;
+		    y += 30;
 		}
-
+		
 		JLabel lblData = new JLabel("Data prevista restituzione:");
-		lblData.setFont(labelFont);
-		lblData.setForeground(new Color(41, 128, 185));
-		lblData.setBounds(10, y + 10, 250, 22);
+		lblData.setBackground(Color.LIGHT_GRAY);
+		lblData.setForeground(Color.LIGHT_GRAY);
+		lblData.setBounds(10, y + 10, 200, 20);
 		panelPrenotazione.add(lblData);
 
 		JTextField txtData = new JTextField();
-		txtData.setFont(fieldFont);
-		txtData.setForeground(new Color(52, 73, 94));
-		txtData.setBackground(new Color(236, 240, 241));
-		txtData.setBorder(BorderFactory.createLineBorder(new Color(189, 195, 199), 1));
-		txtData.setBounds(220, y + 10, 150, 28);
+		txtData.setBounds(200, y + 10, 150, 20);
 		panelPrenotazione.add(txtData);
 		txtData.setColumns(10);
 
 		JButton btnConferma = new JButton("Conferma prenotazione");
-		btnConferma.setBackground(new Color(52, 152, 219));
-		btnConferma.setForeground(Color.WHITE);
-		btnConferma.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		btnConferma.setBounds(420, y + 50, 170, 32);
+		btnConferma.setBackground(Color.LIGHT_GRAY);
+
+		btnConferma.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+				String dataRest = txtData.getText();
+				Date inputDate;
+
+				// Trova l'indice del radio selezionato
+				int selectedIndex = -1;
+				for (int i = 0; i < radioButtons.length; i++) {
+					if (radioButtons[i].isSelected()) {
+						selectedIndex = i;
+						break;
+					}
+				}
+
+				// Validazione: libro e data
+				if (selectedIndex == -1 || dataRest.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				LibroDTO libroSelezionato = libri.get(selectedIndex);
+
+				// Validazione formato data
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				sdf.setLenient(false);
+				try {
+					inputDate = sdf.parse(dataRest);
+				} catch (ParseException e1) {
+					JOptionPane.showMessageDialog(null, "Per favore inserire una data del tipo DD/MM/YYYY valida.","Errore formato data", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				ControllerPrenotazione controllerPren = ControllerPrenotazione.getInstance();
+
+				// Validazione data futura
+				if(!controllerPren.futureDateCheck(inputDate)) {
+					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				// Simula i dati ricevuti dal DB
+				int idPrenotazione = (int)(Math.random() * 100000);
+
+				String emailUtente = txtMatteoingswcom.getText();
+
+				//Calcolo del costo totale tramite controller
+				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
+				
+				FormRicevuta ricevutaFrame = new FormRicevuta(idPrenotazione, libroSelezionato.getTitolo(), libroSelezionato.getCodiceISBN(), emailUtente, dataRest, costoTotale);
+				ricevutaFrame.setVisible(true);
+
+				// Cambia pannello
+				panelPrenotazione.setVisible(false);
+
+				// Mostra dialogo di conferma
+				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
+
+				//Ritorna alla home
+				panelMenu.setVisible(true);       // nasconde tutto il contentPane e i bottoni del content pane
+				lblNewLabel.setVisible(true);
+				lblNewLabel_1.setVisible(true);
+				lblNewLabel_2.setVisible(true);
+				txtMatteo.setVisible(true);
+				txtBottari.setVisible(true);
+				txtMatteoingswcom.setVisible(true);
+				txtPassword.setVisible(true);
+				btnMostraPassword.setVisible(true);
+				lblNewLabel_3.setVisible(true);
+				lblImmagineProfilo.setVisible(true); 
+				btnNewButton_5.setVisible(true); 
+				btnNewButton.setVisible(true); 
+				btnMenu.setVisible(true);
+				
+		        panelPrenotazione.setVisible(false);  // mostra solo la prenotazione
+			}
+		});
+		
+		btnConferma.setBounds(460, y + 50, 100, 25);
 		panelPrenotazione.add(btnConferma);
-
-		// Migliora estetica panelPrenotazione
-		panelPrenotazione.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(41, 128, 185), 2, true),
-			BorderFactory.createEmptyBorder(18, 18, 18, 18)
-		));
-		panelPrenotazione.setBackground(new Color(255,255,255,220));
-
+		
 		contentPane.add(panelPrenotazione);
-
-		lblNewLabel_4 = new JLabel("📚 Catalogo Libri Disponibili 📖");
-		lblNewLabel_4.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		lblNewLabel_4.setForeground(new Color(41, 128, 185));
-		lblNewLabel_4.setBounds(180, 0, 300, 35);
+		
+		lblNewLabel_4 = new JLabel("📚Catalogo Libri Disponibili📖");
+		lblNewLabel_4.setBackground(Color.LIGHT_GRAY);
+		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_4.setBounds(209, 0, 158, 35);
 		panelPrenotazione.add(lblNewLabel_4);
 	}
 }
