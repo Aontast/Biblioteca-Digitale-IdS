@@ -292,6 +292,8 @@ public class FormRegistrazione extends JFrame {
                         JOptionPane.ERROR_MESSAGE
                     );
                 }
+                panelRegister.setVisible(false);
+                panelHome.setVisible(true);
             }
         });
 
