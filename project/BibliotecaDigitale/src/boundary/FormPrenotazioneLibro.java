@@ -476,7 +476,7 @@ public class FormPrenotazioneLibro extends JFrame {
 class ControllerCatalogo {
     public static List<String> getLibriDisponibili() {
         return Arrays.asList(
-            "Titolo1 | Autore1 | ISBN1 | 2020",
+            "Titolo | Autore1 | ISBN1 | 2020",
             "Titolo2 | Autore2 | ISBN2 | 2018",
             "Titolo3 | Autore3 | ISBN3 | 2022"
         );

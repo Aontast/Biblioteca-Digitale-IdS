@@ -3,6 +3,8 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.CopiaLibroDAO;
+
 public class Libro {
 
     private String titolo;
@@ -34,6 +36,18 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = numeroCopieTotali;
+    }
+
+    public boolean verificaDisponibilitaLibro() {
+        CopiaLibroDAO copiaLibroDAO = new CopiaLibroDAO();
+        List<CopiaLibro> copieDisponibili = copiaLibroDAO.getCopieDisponibili();
+
+        for (CopiaLibro copia : copieDisponibili) {
+            if (copia.getLibro().getCodiceISBN() == this.codiceISBN) {
+                return true; // Se trova una copia disponibile, ritorna true
+            }
+        }
+        return false; // Se non trova nessuna copia disponibile, ritorna false
     }
 
     public void aggiungiCopia() {
@@ -91,28 +105,6 @@ public class Libro {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-
-    /*
-    public void incrementaDisponibilitaCopie() {
-        this.disponibilitaCopie++;
-    }
-
-    public void decrementaDisponibilitaCopie() {
-        this.disponibilitaCopie--;
-    } */
-
-    //Enhanched for per scorrere "tutto", o fino a quando trovo il primo disponibile. 
-    //Questo metodo mi controlla la disponibilità alla prenotazione del libro
-
-    /*public boolean verificaDisponibilita() {
-        for (CopiaLibro copia: listaCopie) {
-            if (copia.isDisponibile()) {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
 
     @Override
     public String toString() {

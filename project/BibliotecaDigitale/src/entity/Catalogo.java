@@ -1,6 +1,8 @@
 package entity;
 
 import database.LibroDAO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,5 +62,20 @@ public class Catalogo {
             System.out.println("Il libro con ISBN " + isbn + " non è presente nel catalogo.");
             return null;
         }
+    }
+
+    public List<Libro> mostraLibriDisponibili(){
+        
+        List<Libro> libriTotali = mostraCatalogo();
+        List<Libro> libriDisponibili = new ArrayList<>();
+
+        // Filtra i libri disponibili
+        for (Libro libro : libriTotali) {
+            if (libro.verificaDisponibilitaLibro()) {
+                libriDisponibili.add(libro);
+            }
+        }
+
+        return libriDisponibili;
     }
 }
