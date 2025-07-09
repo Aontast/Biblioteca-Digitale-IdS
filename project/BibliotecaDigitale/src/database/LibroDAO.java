@@ -38,7 +38,7 @@ public class LibroDAO {
             result = DBConnectionManager.updateQuery(query);
             System.out.println("[SalvaLibro] Libro Salvato con successo nel database");
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw e;
+            throw new SQLIntegrityConstraintViolationException("Un libro con lo stesso ISBN è già presente nel database.", e);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("[SalvaLibro] Libro non salvato nel database: " + e.getMessage());
             result = -1;

@@ -1,7 +1,6 @@
 package entity;
 
 import database.LibroDAO;
-
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +41,11 @@ public class Catalogo {
         Libro libro = new Libro(codiceISBN, titolo, autore, annoDiPubblicazione, genere, descrizione);
 
         LibroDAO libroDAO = new LibroDAO();
-        try {
-            libroDAO.salvaLibro(libro);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            System.err.println("Libro con isbn " + codiceISBN + " già presente nel catalogo");
-            throw e;
-        }
+        
+        libroDAO.salvaLibro(libro);
+        //questo potrebbe propagare un'eccezione SQLIntegrityConstraintViolationException
+        //se il libro con lo stesso ISBN esiste già nel database, noi lo propaghiamo al chiamante
+        //in modo tale che si possa visualizzare un messaggio di errore
     }
 
     public void eliminaLibro(){
