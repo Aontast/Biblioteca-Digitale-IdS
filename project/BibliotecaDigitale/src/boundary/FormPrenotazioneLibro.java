@@ -242,58 +242,6 @@ public class FormPrenotazioneLibro extends JFrame {
 			}
 		});
 		
-		JPanel panelRicevuta = new JPanel();
-		panelRicevuta.setBackground(new Color(0, 0, 0, 215)); // semi-trasparente
-		panelRicevuta.setLayout(null);
-		panelRicevuta.setBounds(10, 10, 600, 430);
-		panelRicevuta.setVisible(false);
-		contentPane.add(panelRicevuta);
-		
-		// Etichette che riempirai dopo la prenotazione
-		JLabel titoloLabel = new JLabel("📚Ricevuta Prenotazione📖");
-		titoloLabel.setForeground(Color.LIGHT_GRAY);
-		titoloLabel.setBounds(217, 10, 154, 28);
-		panelRicevuta.add(titoloLabel);
-		
-		JLabel lblIdPrenotazione = new JLabel("ID Prenotazione:");
-		lblIdPrenotazione.setForeground(Color.LIGHT_GRAY);
-		lblIdPrenotazione.setBounds(10, 40, 400, 20);
-		panelRicevuta.add(lblIdPrenotazione);
-
-		JLabel lblTitolo = new JLabel("Titolo:");
-		lblTitolo.setForeground(Color.LIGHT_GRAY);
-		lblTitolo.setBounds(10, 70, 400, 20);
-		panelRicevuta.add(lblTitolo);
-
-		JLabel lblIsbn = new JLabel("ISBN:");
-		lblIsbn.setForeground(Color.LIGHT_GRAY);
-		lblIsbn.setBounds(10, 100, 400, 20);
-		panelRicevuta.add(lblIsbn);
-
-		JLabel lblIdCopia = new JLabel("ID Copia:");
-		lblIdCopia.setForeground(Color.LIGHT_GRAY);
-		lblIdCopia.setBounds(10, 130, 400, 20);
-		panelRicevuta.add(lblIdCopia);
-
-		JLabel lblEmailUtente = new JLabel("Email Utente:");
-		lblEmailUtente.setForeground(Color.LIGHT_GRAY);
-		lblEmailUtente.setBounds(10, 160, 400, 20);
-		panelRicevuta.add(lblEmailUtente);
-
-		JLabel lblDataRest = new JLabel("Data Restituzione:");
-		lblDataRest.setForeground(Color.LIGHT_GRAY);
-		lblDataRest.setBounds(10, 190, 400, 20);
-		panelRicevuta.add(lblDataRest);
-
-		JLabel lblCosto = new JLabel("Costo Totale:");
-		lblCosto.setForeground(Color.LIGHT_GRAY);
-		lblCosto.setBounds(10, 220, 400, 20);
-		panelRicevuta.add(lblCosto);
-
-		
-		btnNewButton_3.setBounds(10, 110, 204, 21);
-		panelMenu.add(btnNewButton_3);
-		
 		btnNewButton_4 = new JButton("Gestisci Prenotazioni");
 		btnNewButton_4.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -449,7 +397,6 @@ public class FormPrenotazioneLibro extends JFrame {
 
 				// Cambia pannello
 				panelPrenotazione.setVisible(false);
-				panelRicevuta.setVisible(true);
 
 				// Mostra dialogo di conferma
 				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
@@ -464,7 +411,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4 = new JLabel("📚Catalogo Libri Disponibili📖");
 		lblNewLabel_4.setBackground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_4.setBounds(209, 0, 158, 35);
+		lblNewLabel_4.setBounds(209, 0, 175, 35);
 		panelPrenotazione.add(lblNewLabel_4);
 	}
 }
