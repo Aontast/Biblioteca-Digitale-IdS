@@ -242,6 +242,9 @@ public class FormPrenotazioneLibro extends JFrame {
 			}
 		});
 		
+		btnNewButton_3.setBounds(10, 110, 204, 21);
+		panelMenu.add(btnNewButton_3);
+		
 		btnNewButton_4 = new JButton("Gestisci Prenotazioni");
 		btnNewButton_4.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -411,7 +414,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4 = new JLabel("📚Catalogo Libri Disponibili📖");
 		lblNewLabel_4.setBackground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_4.setBounds(209, 0, 175, 35);
+		lblNewLabel_4.setBounds(209, 0, 158, 35);
 		panelPrenotazione.add(lblNewLabel_4);
 	}
 }
