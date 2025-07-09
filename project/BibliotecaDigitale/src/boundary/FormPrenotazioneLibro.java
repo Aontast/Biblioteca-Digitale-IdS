@@ -158,7 +158,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		txtPassword.setBounds(38, 237, 151, 25);
 		txtPassword.setEchoChar('•');
 		contentPane.add(txtPassword);
-		txtPassword.setText("Swing_1");
+		txtPassword.setText("Swing_12");
 		
 		
 		JButton btnMostraPassword = new JButton("👁");
