@@ -30,7 +30,7 @@ public class FormRicevuta extends JFrame{
         }
 
         setTitle("Ricevuta Prenotazione");
-        setSize(300, 250);
+        setSize(600, 500);
         setLocationRelativeTo(null); // centrare
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // chiudi solo questa finestra
 
