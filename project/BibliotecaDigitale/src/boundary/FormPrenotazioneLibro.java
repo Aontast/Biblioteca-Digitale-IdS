@@ -435,21 +435,15 @@ public class FormPrenotazioneLibro extends JFrame {
 		        String[] parts = libroSelezionato.split("\\|");
 		        String titolo = parts[0].trim();
 		        String isbn = parts[2].trim();
-		        int idCopia = (int)(Math.random() * 1000);
 
 		        String emailUtente = txtMatteoingswcom.getText();
 
-		        // Calcolo costo
-		        long giorni = 7; // o calcolo più realistico dalla data odierna
-		        double[] prezziPossibili = {1.5, 2.0, 2.5};
-		        double prezzo = prezziPossibili[(int)(Math.random() * prezziPossibili.length)];
-		        double costoTotale = giorni * prezzo;
+				double costoTotale = ControllerPrenotazione.calcolaPrezzo(inputDate);
 
 		        // Popola la ricevuta
 		        lblIdPrenotazione.setText("ID Prenotazione: " + idPrenotazione);
 		        lblTitolo.setText("Titolo: " + titolo);
 		        lblIsbn.setText("ISBN: " + isbn);
-		        lblIdCopia.setText("ID Copia: " + idCopia);
 		        lblEmailUtente.setText("Email Utente: " + emailUtente);
 		        lblDataRest.setText("Data Restituzione: " + dataRest);
 		        lblCosto.setText("Costo Totale: € " + String.format("%.2f", costoTotale));
