@@ -2,6 +2,8 @@ package entity;
 
 import database.UtenteRegistratoDAO;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class SistemaAutenticazione {
 
     // Singleton pattern
@@ -9,6 +11,7 @@ public class SistemaAutenticazione {
     private SistemaAutenticazione() {
         super();
     }
+
     public static synchronized SistemaAutenticazione getInstance() {
         if (instance == null) {
             instance = new SistemaAutenticazione();
@@ -16,23 +19,17 @@ public class SistemaAutenticazione {
         return instance;
     }
 
-    public void registrazioneUtente(String nome, String cognome, String email, String password) throws Exception {
-        // Verifica che mail non sia gia presente nel database
-        if (verificaPresenzaCredenziali(email)) {
-            throw new Exception("Utente con email " + email + " già registrato.");
-        }
-
+    public void registrazioneCliente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException {
         // Crea un nuovo Cliente e lo salva nel database
         // Utilizza il DAO per interagire con il database
         UtenteRegistrato utente = new Cliente(nome, cognome, email, password);
         UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
-        int result = utenteDAO.salvaUtente(utente);
-        
-        // Controlla se la registrazione è andata a buon fine
-        // Se il risultato è minore o uguale a 0, significa che c'è stato un errore
-        // durante la registrazione, quindi lancia un'eccezione
-        if (result <= 0) {
-            throw new Exception("Registrazione fallita per l'utente: " + email);
+
+        try {
+            utenteDAO.salvaUtente(utente);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Account con email "+ email+ " già presente");
+            throw e;
         }
     }
 
