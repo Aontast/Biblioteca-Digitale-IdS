@@ -285,10 +285,16 @@ public class FormRegistrazione extends JFrame {
                         "Successo",
                         JOptionPane.INFORMATION_MESSAGE
                     );
-                } catch (SQLIntegrityConstraintViolationException ex) {
+                } catch (SQLIntegrityConstraintViolationException ex) {  //errore se gia esistente
                     JOptionPane.showMessageDialog(null,
                         ex.getMessage(),
                         "Errore registrazione",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }catch (Exception ex) {     //errore generico
+                    JOptionPane.showMessageDialog(null,
+                        "Si è verificato un errore durante la registrazione: " + ex.getMessage(),
+                        "Errore",
                         JOptionPane.ERROR_MESSAGE
                     );
                 }
