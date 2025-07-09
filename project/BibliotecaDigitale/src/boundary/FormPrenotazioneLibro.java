@@ -403,6 +403,24 @@ public class FormPrenotazioneLibro extends JFrame {
 
 				// Mostra dialogo di conferma
 				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
+
+				//Ritorna alla home
+				panelMenu.setVisible(true);       // nasconde tutto il contentPane e i bottoni del content pane
+				lblNewLabel.setVisible(true);
+				lblNewLabel_1.setVisible(true);
+				lblNewLabel_2.setVisible(true);
+				txtMatteo.setVisible(true);
+				txtBottari.setVisible(true);
+				txtMatteoingswcom.setVisible(true);
+				txtPassword.setVisible(true);
+				btnMostraPassword.setVisible(true);
+				lblNewLabel_3.setVisible(true);
+				lblImmagineProfilo.setVisible(true); 
+				btnNewButton_5.setVisible(true); 
+				btnNewButton.setVisible(true); 
+				btnMenu.setVisible(true);
+				
+		        panelPrenotazione.setVisible(false);  // mostra solo la prenotazione
 			}
 		});
 		
