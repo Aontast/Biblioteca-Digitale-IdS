@@ -5,12 +5,25 @@ import java.util.concurrent.TimeUnit;
 
 public class ControllerPrenotazione {
 
-    public static boolean futureDateCheck(Date check){
+    private static ControllerPrenotazione instance = null;
+
+    private ControllerPrenotazione(){
+        super();
+    }
+
+    public static synchronized ControllerPrenotazione getInstance() {
+        if (instance == null) {
+            instance = new ControllerPrenotazione();
+        }
+        return instance;
+    }
+
+    public boolean futureDateCheck(Date check){
         Date today = new Date();
         return check.after(today);
     }
 
-    public static double calcolaPrezzo(Date previstaRestituzione){
+    public double calcolaPrezzo(Date previstaRestituzione){
         double prezzo = 0.25;
         Date oggi = new Date();
 

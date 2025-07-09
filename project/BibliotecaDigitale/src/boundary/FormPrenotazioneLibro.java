@@ -428,8 +428,10 @@ public class FormPrenotazioneLibro extends JFrame {
 					return;
 				}
 
+				ControllerPrenotazione controllerPren = ControllerPrenotazione.getInstance();
+
 				// Validazione data futura
-				if(!ControllerPrenotazione.futureDateCheck(inputDate)) {
+				if(!controllerPren.futureDateCheck(inputDate)) {
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -437,20 +439,13 @@ public class FormPrenotazioneLibro extends JFrame {
 				// Simula i dati ricevuti dal DB
 				int idPrenotazione = (int)(Math.random() * 100000);
 
-				Long isbn = libroSelezionato.getCodiceISBN();
 				String emailUtente = txtMatteoingswcom.getText();
 
-				double costoTotale = ControllerPrenotazione.calcolaPrezzo(inputDate);
+				//Calcolo del costo totale tramite controller
+				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 				
-				/* 
-				// Popola la ricevuta, QUESTO è SBAGLIATO, VA ISTANZIATA LA NUOVA FORM
-				lblIdPrenotazione.setText("ID Prenotazione: " + idPrenotazione);
-				lblTitolo.setText("Titolo: " + titolo);
-				lblIsbn.setText("ISBN: " + isbn);
-				lblEmailUtente.setText("Email Utente: " + emailUtente);
-				lblDataRest.setText("Data Restituzione: " + dataRest);
-				lblCosto.setText("Costo Totale: € " + String.format("%.2f", costoTotale));
-				*/
+				FormRicevuta ricevutaFrame = new FormRicevuta(idPrenotazione, libroSelezionato.getTitolo(), libroSelezionato.getCodiceISBN(), emailUtente, dataRest, costoTotale);
+				ricevutaFrame.setVisible(true);
 
 				// Cambia pannello
 				panelPrenotazione.setVisible(false);
@@ -458,9 +453,6 @@ public class FormPrenotazioneLibro extends JFrame {
 
 				// Mostra dialogo di conferma
 				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
-
-				//ricevutaFrame = new FormRicevuta(idPrenotazione, libroSelezionato.getTitolo(), libroSelezionato.getCodiceISBN(), emailUtente, dataRest, costoTotale);
-				//ricevutaFrame.setVisible(true);
 			}
 		});
 		

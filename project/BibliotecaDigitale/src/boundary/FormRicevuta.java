@@ -1,16 +1,33 @@
 package boundary;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class FormRicevuta extends JFrame{
+    private Image backgroundImage;
 
-    public FormRicevuta(String IDPrenotazione, String titolo, String ISBN, String email, String data, double prezzo) {
+    public FormRicevuta(int IDPrenotazione, String titolo, long ISBN, String email, String data, double prezzo) {
+        try {
+            backgroundImage = new ImageIcon(getClass().getResource("/resources/backgroundRicevuta.jpg")).getImage();
+			// Ridimensiona l'immagine per adattarla alla finestra
+			backgroundImage = backgroundImage.getScaledInstance(
+				Toolkit.getDefaultToolkit().getScreenSize().width, 
+				Toolkit.getDefaultToolkit().getScreenSize().height, 
+				Image.SCALE_SMOOTH
+			);
+        } catch (Exception e) {
+            System.out.println("Errore caricamento immagine: " + e.getMessage());
+        }
+
         setTitle("Ricevuta Prenotazione");
         setSize(300, 250);
         setLocationRelativeTo(null); // centrare
