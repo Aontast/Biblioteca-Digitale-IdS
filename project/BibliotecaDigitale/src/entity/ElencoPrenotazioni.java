@@ -23,7 +23,7 @@ public class ElencoPrenotazioni {
         }
         return instance;
     }
-    
+
     public void elencaPrenotazioniUtente(){
 
     }

@@ -387,11 +387,13 @@ public class FormPrenotazioneLibro extends JFrame {
 					return;
 				}
 
-				// Simula i dati ricevuti dal DB
+				// inizio creazione prenotazione
 				int idPrenotazione = (int)(Math.random() * 100000);
 
 				//Calcolo del costo totale tramite controller
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
+
+				controllerPren.prenotaLibroDisponibile(libroSelezionato, costoTotale, inputDate, txtMatteoingswcom.getText());
 				
 				FormRicevuta ricevutaFrame = new FormRicevuta(
 						idPrenotazione,

@@ -1,6 +1,12 @@
 package control;
 
+import DTO.LibroDTO;
+import database.LibroDAO;
+import entity.*;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ControllerPrenotazione {
@@ -34,7 +40,21 @@ public class ControllerPrenotazione {
         return costoTotale;
     }
 
-    public void prenotaLibroDisponibile(){
+    public void prenotaLibroDisponibile(LibroDTO libroDTO, double costo, Date dataConsegna, String email) {
 
+        Libro libro = new Libro(
+                libroDTO.getCodiceISBN(),
+                libroDTO.getTitolo(),
+                libroDTO.getAutore(),
+                libroDTO.getAnnoDiPubblicazione(),
+                libroDTO.getGenere(),
+                libroDTO.getDescrizione()
+        );
+        List<CopiaLibro> listaCopieDisp = libro.getCopieDisponibili();
+
+        CopiaLibro copiaLibro = listaCopieDisp.getFirst();
+
+        Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro.getID(), email);
+        prenotazione.salvaPrenotazione();
     }
 }

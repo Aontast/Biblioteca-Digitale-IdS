@@ -25,22 +25,21 @@ public class PrenotazioneDAO {
      * @return Risultato della query.
      * @throws SQLIntegrityConstraintViolationException Se si verifica una violazione di vincoli di integrità.
      */
-    public int salvaPrenotazione(Prenotazione prenotazione) throws SQLIntegrityConstraintViolationException {
+    public int salvaPrenotazione(Prenotazione prenotazione) {
 
         int result;
         String query = String.format(Locale.US, // Specifica la locale US qui
                 "INSERT INTO prenotazioni (DataConsegna, Costo, Copia, Utente) VALUES('%s', %f, %d, '%s')",
                 prenotazione.getDataConsegna(), // Assicurati che questo sia già una stringa formattata correttamente per il DB (es. "yyyy-MM-dd HH:mm:ss")
                 prenotazione.getCostoPrestito(),
-                prenotazione.getCopiaLibro().getID(),
-                prenotazione.getUtenteRegistrato().getEmail()
+                prenotazione.getIdCopia(),
+                prenotazione.getEmailUtente()
         );
 
         try {
             result = DBConnectionManager.updateQuery(query);
             System.out.println("[salvaPrenotazione] Prenotazione salvata con successo nel database");
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw e;
+            
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("[salvaPrenotazione] Prenotazione non salvata nel database: " + e.getMessage());
             result = -1;
@@ -94,7 +93,7 @@ public class PrenotazioneDAO {
                 );
 
                 listaPrenotazioni.add(new Prenotazione(
-                    rs.getString("DataConsegna"),
+                    rs.getDate("DataConsegna"),
                     rs.getDouble("Costo"),
                     copia,
                     utente
