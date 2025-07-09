@@ -2,9 +2,11 @@ package control;
 
 import entity.SistemaAutenticazione;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class ControllerRegistrazione {
 
-    public void registraUtente(String nome, String cognome, String email, String password) throws Exception {
+    public void registraUtente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException {
         // Istanzia il sistema di autenticazione
         SistemaAutenticazione sistemaAut = SistemaAutenticazione.getInstance();
         
@@ -12,8 +14,8 @@ public class ControllerRegistrazione {
         //verificheremo la presenza di un utente con la stessa email nell'entity
 
         // Chiama il metodo di registrazione utente
-        sistemaAut.registrazioneUtente(nome, cognome, email, password);
-        //uesto può anche inoltrare una eccezione nel caso in cui l'utente sia già registrato
+        sistemaAut.registrazioneCliente(nome, cognome, email, password);
+        //Questo può anche inoltrare una eccezione nel caso in cui l'utente sia già registrato
         //eccezione che viene propagata al boundary per poi mostrarla come messaggio.
     }
 }

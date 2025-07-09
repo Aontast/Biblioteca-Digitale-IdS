@@ -85,7 +85,7 @@ public class FormPrenotazioneLibro extends JFrame {
         }
 		
         try {
-            Image icon = new ImageIcon(getClass().getResource("/resources/iconaApp.jpg")).getImage();
+            Image icon = new ImageIcon(getClass().getResource("/resources/login_background.jpg")).getImage();
             setIconImage(icon);
         } catch (Exception e) {
             System.out.println("Errore caricamento icona: " + e.getMessage());

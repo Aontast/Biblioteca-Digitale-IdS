@@ -25,6 +25,7 @@ import control.ControllerRegistrazione;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class FormRegistrazione extends JFrame {
 
@@ -284,7 +285,7 @@ public class FormRegistrazione extends JFrame {
                         "Successo",
                         JOptionPane.INFORMATION_MESSAGE
                     );
-                } catch (Exception ex) {
+                } catch (SQLIntegrityConstraintViolationException ex) {
                     JOptionPane.showMessageDialog(null,
                         ex.getMessage(),
                         "Errore registrazione",
