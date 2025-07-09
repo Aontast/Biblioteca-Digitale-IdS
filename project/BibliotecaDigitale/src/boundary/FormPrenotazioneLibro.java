@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DTO.LibroDTO;
+import control.ControllerCatalogo;
 import control.ControllerPrenotazione;
 
 import javax.swing.ButtonGroup;
@@ -374,7 +375,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		JRadioButton[] radioButtons = new JRadioButton[libri.size()];
 
 		for (int i = 0; i < libri.size(); i++) {
-		    radioButtons[i] = new JRadioButton(libri.get(i));
+		    radioButtons[i] = new JRadioButton(libri.get(i).toString());
 		    radioButtons[i].setBounds(10, y, 500, 20);
 		    panelPrenotazione.add(radioButtons[i]);
 		    gruppoLibri.add(radioButtons[i]);
@@ -400,66 +401,65 @@ public class FormPrenotazioneLibro extends JFrame {
 				String dataRest = txtData.getText();
 				Date inputDate;
 
-				// Validation
-		        String libroSelezionato = null;
-		        for (JRadioButton rb : radioButtons) {
-		            if (rb.isSelected()) {
-		                libroSelezionato = rb.getText();
-		                break;
-		            }
-		        }
+				// Trova l'indice del radio selezionato
+				int selectedIndex = -1;
+				for (int i = 0; i < radioButtons.length; i++) {
+					if (radioButtons[i].isSelected()) {
+						selectedIndex = i;
+						break;
+					}
+				}
 
-				//Se l'utente non seleziona i campi
-		        if (libroSelezionato == null || dataRest.isEmpty()) {
-		            JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
-		            return;
-		        }
+				// Validazione: libro e data
+				if (selectedIndex == -1 || dataRest.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 
-				//Se l'utente scrive una data con un formato non supportato
+				LibroDTO libroSelezionato = libri.get(selectedIndex);
+
+				// Validazione formato data
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				sdf.setLenient(false);
 				try {
-            		inputDate = sdf.parse(dataRest);
-        		} catch (ParseException e1) {
+					inputDate = sdf.parse(dataRest);
+				} catch (ParseException e1) {
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data del tipo DD/MM/YYYY valida.","Errore formato data", JOptionPane.ERROR_MESSAGE);
 					return;
-       			}
+				}
 
-				//Se l'utente inserisce una data già passata
+				// Validazione data futura
 				if(!ControllerPrenotazione.futureDateCheck(inputDate)) {
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
+				// Simula i dati ricevuti dal DB
+				int idPrenotazione = (int)(Math.random() * 100000);
 
-		        // Simula i dati ricevuti dal DB
-		        int idPrenotazione = (int)(Math.random() * 100000);
-
-
-		        String[] parts = libroSelezionato.split("\\|");
-		        String titolo = parts[0].trim();
-		        String isbn = parts[2].trim();
-
-		        String emailUtente = txtMatteoingswcom.getText();
+				Long isbn = libroSelezionato.getCodiceISBN();
+				String emailUtente = txtMatteoingswcom.getText();
 
 				double costoTotale = ControllerPrenotazione.calcolaPrezzo(inputDate);
-
-		        // Popola la ricevuta
-		        lblIdPrenotazione.setText("ID Prenotazione: " + idPrenotazione);
-		        lblTitolo.setText("Titolo: " + titolo);
-		        lblIsbn.setText("ISBN: " + isbn);
-		        lblEmailUtente.setText("Email Utente: " + emailUtente);
-		        lblDataRest.setText("Data Restituzione: " + dataRest);
-		        lblCosto.setText("Costo Totale: € " + String.format("%.2f", costoTotale));
-
-		        // Cambia pannello
-		        panelPrenotazione.setVisible(false);
-		        panelRicevuta.setVisible(true);
-
-		        // Mostra dialogo di conferma
-		        JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
 				
-				//FormRicevuta(String IDPrenotazione, String titolo, String ISBN, String email, String data, double prezzo);
+				/* 
+				// Popola la ricevuta, QUESTO è SBAGLIATO, VA ISTANZIATA LA NUOVA FORM
+				lblIdPrenotazione.setText("ID Prenotazione: " + idPrenotazione);
+				lblTitolo.setText("Titolo: " + titolo);
+				lblIsbn.setText("ISBN: " + isbn);
+				lblEmailUtente.setText("Email Utente: " + emailUtente);
+				lblDataRest.setText("Data Restituzione: " + dataRest);
+				lblCosto.setText("Costo Totale: € " + String.format("%.2f", costoTotale));
+				*/
+
+				// Cambia pannello
+				panelPrenotazione.setVisible(false);
+				panelRicevuta.setVisible(true);
+
+				// Mostra dialogo di conferma
+				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
+
+				//ricevutaFrame = new FormRicevuta(idPrenotazione, libroSelezionato.getTitolo(), libroSelezionato.getCodiceISBN(), emailUtente, dataRest, costoTotale);
 				//ricevutaFrame.setVisible(true);
 			}
 		});
@@ -475,21 +475,4 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4.setBounds(209, 0, 158, 35);
 		panelPrenotazione.add(lblNewLabel_4);
 	}
-}
-
-class ControllerCatalogo {
-    public static List<String> getLibriDisponibili() {
-        return Arrays.asList(
-            "Titolo | Autore1 | ISBN1 | 2020",
-            "Titolo2 | Autore2 | ISBN2 | 2018",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022",
-            "Titolo3 | Autore3 | ISBN3 | 2022"
-        );
-    }
 }

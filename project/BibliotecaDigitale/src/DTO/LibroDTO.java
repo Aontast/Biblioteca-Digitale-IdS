@@ -41,4 +41,9 @@ public class LibroDTO {
     public String getDescrizione() {
         return descrizione;
     }
+
+    @Override
+    public String toString() {
+        return titolo + " | " + autore + " | "  + codiceISBN + " | " + annoDiPubblicazione;
+    }
 }
