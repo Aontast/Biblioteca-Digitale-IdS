@@ -1,10 +1,9 @@
 package control;
 
 import DTO.LibroDTO;
-import database.LibroDAO;
 import entity.*;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +39,7 @@ public class ControllerPrenotazione {
         return costoTotale;
     }
 
-    public void prenotaLibroDisponibile(LibroDTO libroDTO, double costo, Date dataConsegna, String email) {
+    public void prenotaLibroDisponibile(LibroDTO libroDTO, double costo, Date dataConsegna, String email) throws ClassNotFoundException, SQLException {
 
         Libro libro = new Libro(
                 libroDTO.getCodiceISBN(),
@@ -56,5 +55,8 @@ public class ControllerPrenotazione {
 
         Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro.getID(), email);
         prenotazione.salvaPrenotazione();
+        copiaLibro.aggiornaStatoPrenotato();
+
+        System.out.println("[prenotaLibroDisponibile] Prenotazione effettuata con successo per il libro: " + libro.getTitolo());
     }
 }

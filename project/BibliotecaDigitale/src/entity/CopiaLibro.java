@@ -1,5 +1,9 @@
 package entity;
 
+import java.sql.SQLException;
+
+import database.CopiaLibroDAO;
+
 public class CopiaLibro {
 
     public enum StatoCopia {
@@ -24,6 +28,15 @@ public class CopiaLibro {
         this.stato = StatoCopia.DISPONIBILE;
         this.libro = libro;
     }
+
+    public void aggiornaStatoPrenotato() throws ClassNotFoundException, SQLException {
+    // 1. Cambia lo stato dell'oggetto in memoria
+    this.setStatoPrenotato(); // Metodo che fa this.stato = StatoCopia.PRENOTATO
+
+    // 2. Persisti la modifica chiamando il DAO
+    CopiaLibroDAO dao = new CopiaLibroDAO();
+    dao.updateStato(this);
+}
 
     @Override
     public String toString(){

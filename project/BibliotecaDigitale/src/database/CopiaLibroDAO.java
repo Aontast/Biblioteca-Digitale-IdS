@@ -84,4 +84,19 @@ public class CopiaLibroDAO {
         return listaCopie;
     }
 
+    public void updateStato(CopiaLibro copia) throws SQLException, ClassNotFoundException {
+    String query = String.format("UPDATE copie SET Stato = '%s' WHERE IDCopia = %d",
+            copia.getStato().toString(),
+            copia.getID()
+    );
+
+    try {
+        DBConnectionManager.updateQuery(query);
+        System.out.println("[updateStato] Stato della copia " + copia.getID() + " aggiornato a " + copia.getStato());
+    } catch (ClassNotFoundException | SQLException e) {
+        System.err.println("[updateStato] Errore nell'aggiornare lo stato della copia: " + e.getMessage());
+        throw e;
+    }
+}
+
 }

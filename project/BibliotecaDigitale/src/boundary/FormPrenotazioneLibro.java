@@ -1,35 +1,22 @@
 package boundary;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import DTO.LibroDTO;
 import control.ControllerCatalogo;
 import control.ControllerPrenotazione;
 
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
 
 public class FormPrenotazioneLibro extends JFrame {
 
@@ -211,7 +198,83 @@ public class FormPrenotazioneLibro extends JFrame {
 		});
 		btnNewButton_2.setBounds(10, 60, 204, 21);
 		panelMenu.add(btnNewButton_2);
-		
+
+		JPanel panelRingraziamento = new JPanel();
+		panelRingraziamento.setBackground(new Color(0, 0, 0, 215)); // semi-trasparente
+		panelRingraziamento.setVisible(false);  // nascosto all'avvio
+		panelRingraziamento.setBounds(10, 10, 600, 430);  // stesse dimensioni del pannello prenotazione
+		panelRingraziamento.setLayout(null);
+
+		// Titolo principale
+		JLabel lblGrazie = new JLabel("* Grazie per la Prenotazione! *");
+		lblGrazie.setFont(new Font("Segoe UI", Font.BOLD, 28));
+		lblGrazie.setForeground(new Color(255, 215, 0)); // Oro
+		lblGrazie.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGrazie.setBounds(50, 80, 500, 40);
+		panelRingraziamento.add(lblGrazie);
+
+		// Messaggio di attenzione
+		JLabel lblAttenzione = new JLabel("!!! ATTENZIONE !!!");
+		lblAttenzione.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		lblAttenzione.setForeground(new Color(255, 69, 0)); // Rosso arancione
+		lblAttenzione.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAttenzione.setBounds(50, 150, 500, 30);
+		panelRingraziamento.add(lblAttenzione);
+
+		// Primo messaggio informativo
+		JLabel lblInfo1 = new JLabel("Non perdere la ricevuta!");
+		lblInfo1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblInfo1.setForeground(Color.WHITE);
+		lblInfo1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo1.setBounds(50, 190, 500, 25);
+		panelRingraziamento.add(lblInfo1);
+
+		// Secondo messaggio informativo
+		JLabel lblInfo2 = new JLabel("Sarà necessaria per il ritiro del libro");
+		lblInfo2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblInfo2.setForeground(new Color(192, 192, 192));
+		lblInfo2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo2.setBounds(50, 220, 500, 25);
+		panelRingraziamento.add(lblInfo2);
+
+		// Messaggio aggiuntivo
+		JLabel lblInfo3 = new JLabel("--- Conserva la ricevuta stampata o digitale ---");
+		lblInfo3.setFont(new Font("Segoe UI", Font.ITALIC, 16));
+		lblInfo3.setForeground(new Color(144, 238, 144)); // Verde chiaro
+		lblInfo3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo3.setBounds(50, 260, 500, 25);
+		panelRingraziamento.add(lblInfo3);
+
+		// Pulsante per tornare al menu
+		JButton btnTornaMenu = new JButton(">> Torna al Menu Principale");
+		btnTornaMenu.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		btnTornaMenu.setBackground(new Color(70, 130, 180)); // Steel Blue
+		btnTornaMenu.setForeground(Color.WHITE);
+		btnTornaMenu.setBounds(175, 320, 250, 40);
+
+		btnTornaMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Chiudi la finestra corrente
+				dispose();
+
+				// Riavvia il main per creare una nuova istanza
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							FormPrenotazioneLibro nuovaFrame = new FormPrenotazioneLibro();
+							nuovaFrame.setVisible(true);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+
+		panelRingraziamento.add(btnTornaMenu);
+		contentPane.add(panelRingraziamento);
+
+
 		JPanel panelPrenotazione = new JPanel();
 		panelPrenotazione.setBackground(new Color(0, 0, 0, 215)); // semi-trasparente
 		panelPrenotazione.setVisible(false);  // all'avvio nascosto
@@ -389,45 +452,31 @@ public class FormPrenotazioneLibro extends JFrame {
 
 				// inizio creazione prenotazione
 				int idPrenotazione = (int)(Math.random() * 100000);
-
+				
 				//Calcolo del costo totale tramite controller
+				String email = txtMatteoingswcom.getText();
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 
-				controllerPren.prenotaLibroDisponibile(libroSelezionato, costoTotale, inputDate, txtMatteoingswcom.getText());
+				try {
+					controllerPren.prenotaLibroDisponibile(libroSelezionato, costoTotale, inputDate, email);
+				} catch (ClassNotFoundException | SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stao della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				
 				FormRicevuta ricevutaFrame = new FormRicevuta(
 						idPrenotazione,
 						libroSelezionato.getTitolo(),
 						libroSelezionato.getCodiceISBN(),
-						txtMatteoingswcom.getText(),
+						email,
 						dataRest,
 						costoTotale
 				);
 				ricevutaFrame.setVisible(true);
 
-				// Cambia pannello
+				// Cambia pannello -> Pannello di ringraziamento
 				panelPrenotazione.setVisible(false);
-
-				// Mostra dialogo di conferma
-				JOptionPane.showMessageDialog(null, "Prenotazione effettuata con successo!", "Conferma", JOptionPane.INFORMATION_MESSAGE);
-
-				//Ritorna alla home
-				panelMenu.setVisible(true);       // nasconde tutto il contentPane e i bottoni del content pane
-				lblNewLabel.setVisible(true);
-				lblNewLabel_1.setVisible(true);
-				lblNewLabel_2.setVisible(true);
-				txtMatteo.setVisible(true);
-				txtBottari.setVisible(true);
-				txtMatteoingswcom.setVisible(true);
-				txtPassword.setVisible(true);
-				btnMostraPassword.setVisible(true);
-				lblNewLabel_3.setVisible(true);
-				lblImmagineProfilo.setVisible(true); 
-				btnNewButton_5.setVisible(true); 
-				btnNewButton.setVisible(true); 
-				btnMenu.setVisible(true);
-				
-		        panelPrenotazione.setVisible(false);  // mostra solo la prenotazione
+				panelRingraziamento.setVisible(true);
 			}
 		});
 		
