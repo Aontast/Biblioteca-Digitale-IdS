@@ -14,11 +14,10 @@ public class ElencoPrenotazioni {
         return instance;
     }
 
-    public int creaPrenotazioneUtente(Date dataConsegna, double costo, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) throws ClassNotFoundException, SQLException {
+    public void creaPrenotazioneUtente(Date dataConsegna, double costo, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) throws ClassNotFoundException, SQLException {
         Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro, utenteRegistrato);
         prenotazione.salvaPrenotazione();
         copiaLibro.aggiornaStatoPrenotato();
-        return prenotazione.getIDPrenotazione();
     }
 
     public void elencaPrenotazioniUtente(){
