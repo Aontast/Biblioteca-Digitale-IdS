@@ -25,6 +25,7 @@ import control.ControllerRegistrazione;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class FormRegistrazione extends JFrame {
@@ -262,7 +263,7 @@ public class FormRegistrazione extends JFrame {
                     // 3. Controllo dell'Email
                 } else if (!isEmailValida(emailInserita)) {
                     JOptionPane.showMessageDialog(null,
-                            "L'email inserita non è valida o ha un formato non corretto.\nPer favore, riprova.",
+                            "L'email inserita ha un formato non corretto.\nPer favore, riprova.",
                             "Errore nell'Email",
                             JOptionPane.ERROR_MESSAGE);
                     return;
@@ -287,11 +288,11 @@ public class FormRegistrazione extends JFrame {
                     );
                 } catch (SQLIntegrityConstraintViolationException ex) {  //errore se gia esistente
                     JOptionPane.showMessageDialog(null,
-                        ex.getMessage(),
+                        "L’email inserita è già stata utilizzata! ",
                         "Errore registrazione",
                         JOptionPane.ERROR_MESSAGE
                     );
-                }catch (Exception ex) {     //errore generico
+                }catch (SQLException ex) {     //errore generico
                     JOptionPane.showMessageDialog(null,
                         "Si è verificato un errore durante la registrazione: " + ex.getMessage(),
                         "Errore",

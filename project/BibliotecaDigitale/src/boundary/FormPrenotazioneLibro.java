@@ -496,6 +496,5 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setBounds(209, 0, 158, 35);
 		panelPrenotazione.add(lblNewLabel_4);
-		
 	}
 }
