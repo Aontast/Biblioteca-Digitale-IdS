@@ -456,7 +456,8 @@ public class FormPrenotazioneLibro extends JFrame {
 				int idPrenotazione = (int)(Math.random() * 100000);
 				
 				//Calcolo del costo totale tramite controller
-				clienteProfilo = new ClienteDTO("Matteo", "Bottari", "matteo@ingSW.it", "Swing_12");
+				String txtPasswordString = new String(txtPassword.getPassword());
+				clienteProfilo = new ClienteDTO(txtMatteo.getText(), txtBottari.getText(), txtMatteoingswcom.getText(), txtPasswordString);
 				String email = clienteProfilo.getEmail();
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 
