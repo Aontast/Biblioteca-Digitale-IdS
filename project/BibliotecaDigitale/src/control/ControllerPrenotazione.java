@@ -40,7 +40,7 @@ public class ControllerPrenotazione {
         return costoTotale;
     }
 
-    public void prenotaLibroDisponibile(LibroDTO libroDTO, ClienteDTO clienteDTO, double costo, Date dataConsegna) throws ClassNotFoundException, SQLException {
+    public int prenotaLibroDisponibile(LibroDTO libroDTO, ClienteDTO clienteDTO, double costo, Date dataConsegna) throws ClassNotFoundException, SQLException {
 
         Libro libro = new Libro(
                 libroDTO.getCodiceISBN(),
@@ -62,8 +62,9 @@ public class ControllerPrenotazione {
         );
 
         ElencoPrenotazioni elencoPrenotazioni = ElencoPrenotazioni.getInstance();
-        elencoPrenotazioni.creaPrenotazioneUtente(dataConsegna, costo, copiaLibro, cliente);
+        int idPrenotazione = elencoPrenotazioni.creaPrenotazioneUtente(dataConsegna, costo, copiaLibro, cliente);
 
         System.out.println("[prenotaLibroDisponibile] Prenotazione effettuata con successo per il libro: " + libro.getTitolo());
+        return idPrenotazione;
     }
 }
