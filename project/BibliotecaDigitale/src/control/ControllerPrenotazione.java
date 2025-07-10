@@ -52,7 +52,7 @@ public class ControllerPrenotazione {
         );
         
         List<CopiaLibro> listaCopieDisp = libro.getCopieDisponibili();
-        CopiaLibro copiaLibro = listaCopieDisp.getFirst();
+        CopiaLibro copiaLibro = listaCopieDisp.get(0);
 
         UtenteRegistrato cliente = new Cliente(
                 clienteDTO.getNome(),

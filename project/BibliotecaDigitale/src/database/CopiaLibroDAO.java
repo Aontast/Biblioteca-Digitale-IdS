@@ -26,7 +26,7 @@ public class CopiaLibroDAO {
     public int salvaCopiaLibro(CopiaLibro copia) throws SQLIntegrityConstraintViolationException {
 
         int result;
-        String query = "INSERT INTO copie (Stato, Libro) VALUES('%s', %d)".formatted(
+        String query = String.format("INSERT INTO copie (Stato, Libro) VALUES('%s', %d)",
                 copia.getStato().toString(),
                 copia.getLibro().getCodiceISBN()
         );
