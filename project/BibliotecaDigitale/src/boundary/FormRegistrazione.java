@@ -24,7 +24,6 @@ import control.ControllerRegistrazione;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -225,7 +224,7 @@ public class FormRegistrazione extends JFrame {
                 String nomeInserito = txtNome.getText();
                 String cognomeInserito = txtCognome.getText();
                 String emailInserita = txtEmail.getText();
-                String passwordInserita = passwordField.getText();
+                String passwordInserita = new String(passwordField.getPassword());
 
                 // Evita i placeholder
                 if (nomeInserito.equals("Nome")) {
