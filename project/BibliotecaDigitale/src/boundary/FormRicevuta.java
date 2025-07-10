@@ -95,7 +95,7 @@ public class FormRicevuta extends JFrame {
 
         panel.add(Box.createVerticalStrut(18));
 
-        JLabel dataLabel = new JLabel("Data: " + data);
+        JLabel dataLabel = new JLabel("Data restituzione: " + data);
         dataLabel.setFont(infoFont);
         dataLabel.setForeground(infoColor);
         dataLabel.setAlignmentX(CENTER_ALIGNMENT);
