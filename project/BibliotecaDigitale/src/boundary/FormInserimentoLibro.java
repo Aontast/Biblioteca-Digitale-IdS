@@ -2,6 +2,7 @@ package boundary;
 
 import control.ControllerCatalogo;
 import java.awt.*;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
@@ -278,7 +279,7 @@ public class FormInserimentoLibro extends JFrame {
                 new FormGestioneCatalogo().setVisible(true);
             } catch (SQLIntegrityConstraintViolationException ex) {
                 JOptionPane.showMessageDialog(this, "Errore durante l'inserimento del libro: " + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
-            }catch (Exception ex){  //errore generico
+            }catch (SQLException ex){  //errore generico
                 JOptionPane.showMessageDialog(null,
                         "Si è verificato un errore durante la registrazione: " + ex.getMessage(),
                         "Errore",

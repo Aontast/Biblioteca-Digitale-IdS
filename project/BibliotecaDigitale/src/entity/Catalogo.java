@@ -1,6 +1,8 @@
 package entity;
 
 import database.LibroDAO;
+
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class Catalogo {
         //Non implementato
     }
 
-    public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws SQLIntegrityConstraintViolationException {
+    public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws SQLIntegrityConstraintViolationException, SQLException {
         // Crea un nuovo oggetto Libro con i dati forniti
         Libro libro = new Libro(codiceISBN, titolo, autore, annoDiPubblicazione, genere, descrizione);
         libro.salvaLibro();

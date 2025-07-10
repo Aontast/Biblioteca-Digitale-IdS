@@ -3,6 +3,8 @@ package control;
 import DTO.LibroDTO;
 import entity.Catalogo;
 import entity.Libro;
+
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ControllerCatalogo {
         return catalogo.mostraCatalogo();
     }
 
-    public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws SQLIntegrityConstraintViolationException {
+    public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws SQLIntegrityConstraintViolationException, SQLException {
         // Istanzia un oggetto Catalogo per aggiungere un libro
         Catalogo catalogo = Catalogo.getInstance();
         //aggiungilibro potrebbe alzare un eccezione se il libro con lo stesso ISBN esiste già

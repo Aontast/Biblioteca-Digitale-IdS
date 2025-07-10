@@ -463,7 +463,7 @@ public class FormPrenotazioneLibro extends JFrame {
 				try {
 					controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
 				} catch (ClassNotFoundException | SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stao della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stato della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
