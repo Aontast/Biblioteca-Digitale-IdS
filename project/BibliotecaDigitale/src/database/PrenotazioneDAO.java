@@ -58,13 +58,12 @@ public class PrenotazioneDAO {
         List<Prenotazione> listaPrenotazioni = new ArrayList<>();
 
         try {
-            String query = """
-            SELECT *
-            FROM prenotazioni p
-            JOIN copie c ON p.Copia = c.IDCopia
-            JOIN libri l ON c.Libro = l.ISBN
-            JOIN utenti u ON p.Utente = u.IDUtente
-            """;
+            String query = 
+                "SELECT * " +
+                "FROM prenotazioni p " +
+                "JOIN copie c ON p.Copia = c.IDCopia " +
+                "JOIN libri l ON c.Libro = l.ISBN " +
+                "JOIN utenti u ON p.Utente = u.IDUtente ";
             ResultSet rs = DBConnectionManager.selectQuery(query);
 
             while(rs.next()) {

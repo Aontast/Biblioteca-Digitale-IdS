@@ -19,7 +19,7 @@ public class UtenteRegistratoDAO {
     public int salvaUtente(UtenteRegistrato utente) throws SQLIntegrityConstraintViolationException {
 
         int result;
-        String query = "INSERT INTO utenti (email, nome, cognome, password, livelloPermesso) VALUES('%s', '%s', '%s', '%s', %d)".formatted(
+        String query = String.format("INSERT INTO utenti (email, nome, cognome, password, livelloPermesso) VALUES('%s', '%s', '%s', '%s', %d)",
                 utente.getEmail(),
                 utente.getNome(),
                 utente.getCognome(),
