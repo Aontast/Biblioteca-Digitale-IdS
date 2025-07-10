@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class FormInserimentoLibro extends JFrame {
+public class InserimentoLibro extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtTitolo;
@@ -23,12 +23,12 @@ public class FormInserimentoLibro extends JFrame {
 
     private Image backgroundImage;
 
-    public FormInserimentoLibro(Runnable onCancel) {
+    public InserimentoLibro(Runnable onCancel) {
         this();
         this.onCancel = onCancel;
     }
 
-    public FormInserimentoLibro() {
+    public InserimentoLibro() {
         // --- CARICAMENTO IMMAGINE DI SFONDO ---
         try {
             backgroundImage = new ImageIcon(getClass().getResource("/resources/BackGroundGestioneCatalogo.jpg")).getImage();

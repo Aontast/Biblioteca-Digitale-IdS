@@ -15,10 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class FormRicevuta extends JFrame {
+public class RicevutaPrenotazione extends JFrame {
     private Image backgroundImage;
 
-    public FormRicevuta(int IDPrenotazione, String titolo, long ISBN, String email, String data, double prezzo) {
+    public RicevutaPrenotazione(int IDPrenotazione, String titolo, long ISBN, String email, String data, double prezzo) {
 
         try {
             backgroundImage = new ImageIcon(getClass().getResource("/resources/backgroundRicevuta.jpg")).getImage();
