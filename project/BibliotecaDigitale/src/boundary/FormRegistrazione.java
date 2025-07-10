@@ -298,8 +298,20 @@ public class FormRegistrazione extends JFrame {
                         JOptionPane.ERROR_MESSAGE
                     );
                 }
-                panelRegister.setVisible(false);
-                panelHome.setVisible(true);
+                // Chiudi la finestra corrente
+                dispose();
+
+                // Riavvia il main per creare una nuova istanza
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            FormRegistrazione nuovaFrame = new FormRegistrazione();
+                            nuovaFrame.setVisible(true);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
