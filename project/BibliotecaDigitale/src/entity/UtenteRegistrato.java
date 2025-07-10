@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import database.UtenteRegistratoDAO;
@@ -77,7 +78,7 @@ public abstract class UtenteRegistrato {
     }
 
 
-    public void salvaUtenteRegistrato() throws SQLIntegrityConstraintViolationException {
+    public void salvaUtenteRegistrato() throws SQLIntegrityConstraintViolationException, SQLException {
         UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
 
         try {
@@ -86,6 +87,9 @@ public abstract class UtenteRegistrato {
         } catch (SQLIntegrityConstraintViolationException e) {
             System.out.println("[salvaUtenteRegistrato] L'utente con la stessa email " + this.email + " esiste già nel database.");
             throw e;
-        } 
+        } catch (SQLException e) {
+            System.out.println("[salvaUtenteRegistrato] Errore connessione al database");
+            throw e;
+        }
     }
 }

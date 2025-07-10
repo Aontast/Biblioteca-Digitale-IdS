@@ -1,6 +1,8 @@
 package control;
 
 import entity.SistemaAutenticazione;
+
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class ControllerRegistrazione {
@@ -21,7 +23,7 @@ public class ControllerRegistrazione {
         return instance;
     }
 
-    public void registraUtente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException {
+    public void registraUtente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException, SQLException {
         // Istanzia il sistema di autenticazione
         SistemaAutenticazione sistemaAut = SistemaAutenticazione.getInstance();
         
