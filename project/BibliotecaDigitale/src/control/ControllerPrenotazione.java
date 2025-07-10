@@ -1,5 +1,6 @@
 package control;
 
+import DTO.ClienteDTO;
 import DTO.LibroDTO;
 import entity.*;
 
@@ -39,7 +40,7 @@ public class ControllerPrenotazione {
         return costoTotale;
     }
 
-    public void prenotaLibroDisponibile(LibroDTO libroDTO, double costo, Date dataConsegna, String email) throws ClassNotFoundException, SQLException {
+    public void prenotaLibroDisponibile(LibroDTO libroDTO, ClienteDTO clienteDTO, double costo, Date dataConsegna) throws ClassNotFoundException, SQLException {
 
         Libro libro = new Libro(
                 libroDTO.getCodiceISBN(),
@@ -49,13 +50,19 @@ public class ControllerPrenotazione {
                 libroDTO.getGenere(),
                 libroDTO.getDescrizione()
         );
+        
         List<CopiaLibro> listaCopieDisp = libro.getCopieDisponibili();
-
         CopiaLibro copiaLibro = listaCopieDisp.getFirst();
 
-        Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro.getID(), email);
-        prenotazione.salvaPrenotazione();
-        copiaLibro.aggiornaStatoPrenotato();
+        UtenteRegistrato cliente = new Cliente(
+                clienteDTO.getNome(),
+                clienteDTO.getCognome(),
+                clienteDTO.getEmail(),
+                clienteDTO.getPassword()
+        );
+
+        ElencoPrenotazioni elencoPrenotazioni = ElencoPrenotazioni.getInstance();
+        elencoPrenotazioni.creaPrenotazioneUtente(dataConsegna, costo, copiaLibro, cliente);
 
         System.out.println("[prenotaLibroDisponibile] Prenotazione effettuata con successo per il libro: " + libro.getTitolo());
     }

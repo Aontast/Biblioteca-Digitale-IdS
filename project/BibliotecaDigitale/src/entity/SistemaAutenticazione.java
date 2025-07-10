@@ -22,9 +22,7 @@ public class SistemaAutenticazione {
         // Crea un nuovo Cliente e lo salva nel database
         // Utilizza il DAO per interagire con il database
         UtenteRegistrato utente = new Cliente(nome, cognome, email, password);
-        UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
-
-        utenteDAO.salvaUtente(utente);
+        utente.salvaUtenteRegistrato();
         // Questo potrebbe propagare un'eccezione SQLIntegrityConstraintViolationException
         // se l'utente con la stessa email esiste già nel database, noi lo propaghiamo al chiamante
         // in modo tale che si possa visualizzare un messaggio di errore

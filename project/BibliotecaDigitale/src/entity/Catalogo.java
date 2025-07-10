@@ -39,13 +39,8 @@ public class Catalogo {
     public void aggiungiLibro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) throws SQLIntegrityConstraintViolationException {
         // Crea un nuovo oggetto Libro con i dati forniti
         Libro libro = new Libro(codiceISBN, titolo, autore, annoDiPubblicazione, genere, descrizione);
+        libro.salvaLibro();
 
-        LibroDAO libroDAO = new LibroDAO();
-        
-        libroDAO.salvaLibro(libro);
-        //questo potrebbe propagare un'eccezione SQLIntegrityConstraintViolationException
-        //se il libro con lo stesso ISBN esiste già nel database, noi lo propaghiamo al chiamante
-        //in modo tale che si possa visualizzare un messaggio di errore
     }
 
     public void eliminaLibro(){

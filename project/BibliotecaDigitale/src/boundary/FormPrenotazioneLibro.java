@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import DTO.LibroDTO;
+import DTO.ClienteDTO;
 import control.ControllerCatalogo;
 import control.ControllerPrenotazione;
 
@@ -13,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -36,6 +36,8 @@ public class FormPrenotazioneLibro extends JFrame {
 	private JButton btnNewButton_5;
 	private JLabel lblNewLabel_4;
 	private Image backgroundImage;
+	
+	private ClienteDTO clienteProfilo;
 
 	/**
 	 * Launch the application.
@@ -454,11 +456,12 @@ public class FormPrenotazioneLibro extends JFrame {
 				int idPrenotazione = (int)(Math.random() * 100000);
 				
 				//Calcolo del costo totale tramite controller
-				String email = txtMatteoingswcom.getText();
+				clienteProfilo = new ClienteDTO("Matteo", "Bottari", "matteo@ingSW.it", "Swing_12");
+				String email = clienteProfilo.getEmail();
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 
 				try {
-					controllerPren.prenotaLibroDisponibile(libroSelezionato, costoTotale, inputDate, email);
+					controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
 				} catch (ClassNotFoundException | SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stao della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
 					return;
@@ -490,5 +493,6 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setBounds(209, 0, 158, 35);
 		panelPrenotazione.add(lblNewLabel_4);
+		
 	}
 }

@@ -1,6 +1,5 @@
 package entity;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 
 import database.PrenotazioneDAO;
@@ -24,22 +23,13 @@ public class Prenotazione {
         this.utenteRegistrato = utenteRegistrato;
     }
 
-    /*
+    
     public Prenotazione(int IDPrenotazione, Date dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
         this.IDPrenotazione = IDPrenotazione;
         this.costoPrestito = costoPrestito;
         this.dataConsegna = dataConsegna;
         this.copiaLibro = copiaLibro;
         this.utenteRegistrato = utenteRegistrato;
-    }*/
-
-    //costruttore per l'inserimento nel database
-    public Prenotazione(Date dataConsegna, double costoPrestito, int idCopia, String emailUtente) {
-        this.IDPrenotazione = -1; // per indicare che non è ancora stato assegnato dal DB
-        this.costoPrestito = costoPrestito;
-        this.dataConsegna = dataConsegna;
-        this.idCopia = idCopia;
-        this.emailUtente = emailUtente;
     }
 
     public void salvaPrenotazione(){

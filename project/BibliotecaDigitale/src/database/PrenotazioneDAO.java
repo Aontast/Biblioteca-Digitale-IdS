@@ -37,7 +37,7 @@ public class PrenotazioneDAO {
         );
 
         try {
-            result = DBConnectionManager.updateQuery(query);
+            result = DBConnectionManager.updateQueryReturnGeneratedKey(query);
             System.out.println("[salvaPrenotazione] Prenotazione salvata con successo nel database");
             
         } catch (ClassNotFoundException | SQLException e) {

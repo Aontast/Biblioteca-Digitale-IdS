@@ -1,9 +1,11 @@
 package entity;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.CopiaLibroDAO;
+import database.LibroDAO;
 
 public class Libro {
 
@@ -62,6 +64,18 @@ public class Libro {
             }
         }
         return copieLibroDisponbili;
+    }
+
+    public void salvaLibro() throws SQLIntegrityConstraintViolationException {
+        LibroDAO libroDAO = new LibroDAO();
+        
+        try {
+            libroDAO.salvaLibro(this);
+            System.out.println("[salvaLibro] Libro salvato con successo nel database");
+        } catch (Exception e) {
+            System.err.println("[salvaLibro] Il libro con lo stesso ISBN " + this.codiceISBN + " esiste già nel database.");
+            throw e;
+        }
     }
 
     public void aggiungiCopia() {
@@ -132,4 +146,5 @@ public class Libro {
                 ", numeroCopieTotali=" + numeroCopieTotali +
                 '}';
     }
+
 }

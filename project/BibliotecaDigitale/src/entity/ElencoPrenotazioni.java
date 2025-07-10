@@ -1,27 +1,23 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.Date;
 
 public class ElencoPrenotazioni {
 
-    private int numeroPrenotazioniTotali;
-    private List<Prenotazione> listaPrenotazioni;
-
-
-    //solita costruzione singleton.
     private static ElencoPrenotazioni instance = null;
-
-    private ElencoPrenotazioni() {
-        this.numeroPrenotazioniTotali = 0;
-        this.listaPrenotazioni = new ArrayList<>();
-    }
 
     public static synchronized ElencoPrenotazioni getInstance() {
         if (instance == null) {
             instance = new ElencoPrenotazioni();
         }
         return instance;
+    }
+
+    public void creaPrenotazioneUtente(Date dataConsegna, double costo, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) throws ClassNotFoundException, SQLException {
+        Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro, utenteRegistrato);
+        prenotazione.salvaPrenotazione();
+        copiaLibro.aggiornaStatoPrenotato();
     }
 
     public void elencaPrenotazioniUtente(){
@@ -42,10 +38,6 @@ public class ElencoPrenotazioni {
 
     public void generaReportMensile(){
 
-    }
-
-    public void verificaDuplicePrenotazione() {
-        
     }
 
 }

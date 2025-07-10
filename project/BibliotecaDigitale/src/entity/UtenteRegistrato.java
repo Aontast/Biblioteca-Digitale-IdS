@@ -1,5 +1,9 @@
 package entity;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
+import database.UtenteRegistratoDAO;
+
 public abstract class UtenteRegistrato {
     protected String nome;
     protected String cognome;
@@ -70,5 +74,18 @@ public abstract class UtenteRegistrato {
                 ", password='" + password + '\'' +
                 ", livelloPermesso=" + livelloPermesso +
                 '}';
+    }
+
+
+    public void salvaUtenteRegistrato() throws SQLIntegrityConstraintViolationException {
+        UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
+
+        try {
+            utenteDAO.salvaUtente(this);
+            System.out.println("[salvaUtenteRegistrato] Utente salvato con successo nel database");
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("[salvaUtenteRegistrato] L'utente con la stessa email " + this.email + " esiste già nel database.");
+            throw e;
+        } 
     }
 }
