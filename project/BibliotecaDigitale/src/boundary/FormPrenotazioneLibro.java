@@ -390,27 +390,50 @@ public class FormPrenotazioneLibro extends JFrame {
 
 		JRadioButton[] radioButtons = new JRadioButton[libri.size()];
 
+		// Pannello per i radio button dei libri, con layout verticale e sfondo trasparente
+		JPanel panelLibri = new JPanel();
+		panelLibri.setLayout(new BoxLayout(panelLibri, BoxLayout.Y_AXIS));
+		panelLibri.setOpaque(false);
+		panelLibri.setBounds(10, y, 540, libri.size() * 35);
+		panelPrenotazione.add(panelLibri);
+
 		for (int i = 0; i < libri.size(); i++) {
 		    radioButtons[i] = new JRadioButton(libri.get(i).toString());
-		    radioButtons[i].setBounds(10, y, 500, 20);
-		    panelPrenotazione.add(radioButtons[i]);
+		    radioButtons[i].setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		    radioButtons[i].setForeground(new Color(230, 230, 230));
+		    radioButtons[i].setBackground(new Color(0, 0, 0, 0)); // trasparente
+		    radioButtons[i].setFocusPainted(false);
+		    radioButtons[i].setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		    panelLibri.add(radioButtons[i]);
 		    gruppoLibri.add(radioButtons[i]);
-		    y += 30;
 		}
-		
+		y += libri.size() * 35;
+
 		JLabel lblData = new JLabel("Data prevista restituzione:");
-		lblData.setBackground(Color.LIGHT_GRAY);
-		lblData.setForeground(Color.LIGHT_GRAY);
-		lblData.setBounds(10, y + 10, 200, 20);
+		lblData.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		lblData.setBackground(new Color(0, 0, 0, 0));
+		lblData.setForeground(new Color(255, 215, 0));
+		lblData.setBounds(10, y + 10, 220, 25);
 		panelPrenotazione.add(lblData);
 
 		JTextField txtData = new JTextField();
-		txtData.setBounds(200, y + 10, 150, 20);
+		txtData.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		txtData.setBackground(new Color(245, 245, 245));
+		txtData.setForeground(Color.BLACK);
+		txtData.setBounds(230, y + 10, 150, 25);
+		txtData.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(255, 215, 0), 2),
+			BorderFactory.createEmptyBorder(2, 8, 2, 8)
+		));
 		panelPrenotazione.add(txtData);
 		txtData.setColumns(10);
 
 		JButton btnConferma = new JButton("Conferma prenotazione");
-		btnConferma.setBackground(Color.LIGHT_GRAY);
+		btnConferma.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		btnConferma.setBackground(new Color(70, 130, 180));
+		btnConferma.setForeground(Color.WHITE);
+		btnConferma.setFocusPainted(false);
+		btnConferma.setBorder(BorderFactory.createEmptyBorder(8, 18, 8, 18));
 
 		btnConferma.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
