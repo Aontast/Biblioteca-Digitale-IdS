@@ -80,9 +80,12 @@ public abstract class UtenteRegistrato {
 
     public void salvaUtenteRegistrato() throws SQLIntegrityConstraintViolationException, SQLException {
         UtenteRegistratoDAO utenteDAO = new UtenteRegistratoDAO();
-
+        int result = 0;
         try {
-            utenteDAO.salvaUtente(this);
+            result = utenteDAO.salvaUtente(this);
+            if(result == -1) {
+                throw new SQLException("Connessione al database non riuscita");
+            }
             System.out.println("[salvaUtenteRegistrato] Utente salvato con successo nel database");
         } catch (SQLIntegrityConstraintViolationException e) {
             System.out.println("[salvaUtenteRegistrato] L'utente con la stessa email " + this.email + " esiste già nel database.");
