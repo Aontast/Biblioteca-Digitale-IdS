@@ -473,18 +473,16 @@ public class FormPrenotazioneLibro extends JFrame {
 				if(!controllerPren.futureDateCheck(inputDate)) {
 					JOptionPane.showMessageDialog(null, "Per favore inserire una data futura.", "Errore data passata", JOptionPane.ERROR_MESSAGE);
 					return;
-				}
 
-				// inizio creazione prenotazione
-				int idPrenotazione = (int)(Math.random() * 100000);
 				
 				//Calcolo del costo totale tramite controller
 				clienteProfilo = new ClienteDTO("Matteo", "Bottari", "matteo@ingSW.it", "Swing_12");
 				String email = clienteProfilo.getEmail();
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 
+				int idPrenotazione;
 				try {
-					controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
+					idPrenotazione = controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
 				} catch (ClassNotFoundException | SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stato della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
 					return;
