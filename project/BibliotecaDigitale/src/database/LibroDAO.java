@@ -24,7 +24,7 @@ public class LibroDAO {
     public int salvaLibro(Libro libro) throws SQLIntegrityConstraintViolationException {
 
         int result;
-        String query = "INSERT INTO libri VALUES(%d, '%s', '%s', %d, '%s', '%s', %d)".formatted(
+        String query = String.format("INSERT INTO libri VALUES(%d, '%s', '%s', %d, '%s', '%s', %d)",
                 libro.getCodiceISBN(),
                 libro.getTitolo(),
                 libro.getAutore(),
@@ -150,7 +150,7 @@ public class LibroDAO {
     public int updateNumeroCopieLibro(Libro libro) {
 
         int result;
-        String query = "UPDATE libri SET NumeroCopie = %d WHERE ISBN = %d".formatted(
+        String query = String.format("UPDATE libri SET NumeroCopie = %d WHERE ISBN = %d",
                 libro.getnumeroCopieTotali(),
                 libro.getCodiceISBN()
         );
