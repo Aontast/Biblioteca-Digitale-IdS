@@ -73,7 +73,7 @@ public class Libro {
         try {
             result = libroDAO.salvaLibro(this);
             if(result == -1) {
-                throw new SQLException();
+                throw new SQLException("Connessione al database non riuscita");
             }
             System.out.println("[salvaLibro] Libro salvato con successo nel database");
         } catch (SQLIntegrityConstraintViolationException e) {
