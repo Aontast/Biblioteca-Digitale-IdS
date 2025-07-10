@@ -1,6 +1,8 @@
 package entity;
 
 import database.UtenteRegistratoDAO;
+
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 public class SistemaAutenticazione {
@@ -18,7 +20,7 @@ public class SistemaAutenticazione {
         return instance;
     }
 
-    public void registrazioneCliente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException {
+    public void registrazioneCliente(String nome, String cognome, String email, String password) throws SQLIntegrityConstraintViolationException, SQLException {
         // Crea un nuovo Cliente e lo salva nel database
         // Utilizza il DAO per interagire con il database
         UtenteRegistrato utente = new Cliente(nome, cognome, email, password);

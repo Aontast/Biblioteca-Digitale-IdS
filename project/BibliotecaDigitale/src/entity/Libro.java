@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,13 +67,16 @@ public class Libro {
         return copieLibroDisponbili;
     }
 
-    public void salvaLibro() throws SQLIntegrityConstraintViolationException {
+    public void salvaLibro() throws SQLIntegrityConstraintViolationException, SQLException {
         LibroDAO libroDAO = new LibroDAO();
-        
+        int result = 0;
         try {
-            libroDAO.salvaLibro(this);
+            result = libroDAO.salvaLibro(this);
+            if(result == -1) {
+                throw new SQLException();
+            }
             System.out.println("[salvaLibro] Libro salvato con successo nel database");
-        } catch (Exception e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
             System.err.println("[salvaLibro] Il libro con lo stesso ISBN " + this.codiceISBN + " esiste già nel database.");
             throw e;
         }

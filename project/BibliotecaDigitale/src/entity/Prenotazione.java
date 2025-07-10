@@ -1,6 +1,5 @@
 package entity;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import database.PrenotazioneDAO;
@@ -11,6 +10,9 @@ public class Prenotazione {
     private Date dataConsegna;
     private CopiaLibro copiaLibro;
     private UtenteRegistrato utenteRegistrato;
+
+    private int idCopia;
+    private String emailUtente;
 
     
     public Prenotazione(Date dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
@@ -30,7 +32,7 @@ public class Prenotazione {
         this.utenteRegistrato = utenteRegistrato;
     }
 
-    public void salvaPrenotazione() throws SQLException {
+    public void salvaPrenotazione(){
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
         
         int idPrenotazione = prenotazioneDAO.salvaPrenotazione(this);
@@ -39,8 +41,15 @@ public class Prenotazione {
             System.out.println("[salvaPrenotazione] Prenotazione salvata con successo nel database");
         } else {
             System.err.println("[salvaPrenotazione] Prenotazione non salvata nel database");
-            throw new SQLException();
         }
+    }
+
+    public int getIdCopia() {
+        return idCopia;
+    }
+
+    public String getEmailUtente() {
+        return emailUtente;
     }
 
     public CopiaLibro getCopiaLibro() {
