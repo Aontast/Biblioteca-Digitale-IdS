@@ -113,8 +113,8 @@ public class FormPrenotazioneLibro extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		txtMatteo = new JTextField();
-		txtMatteo.setForeground(SystemColor.menu);
-		txtMatteo.setBackground(SystemColor.activeCaptionText);
+		txtMatteo.setForeground(Color.BLACK);
+		txtMatteo.setBackground(Color.LIGHT_GRAY);
 		txtMatteo.setEditable(false);
 		txtMatteo.setText("Matteo");
 		txtMatteo.setBounds(38, 57, 151, 25);
@@ -122,8 +122,8 @@ public class FormPrenotazioneLibro extends JFrame {
 		txtMatteo.setColumns(10);
 
 		txtBottari = new JTextField();
-		txtBottari.setForeground(SystemColor.menu);
-		txtBottari.setBackground(SystemColor.activeCaptionText);
+		txtBottari.setForeground(Color.BLACK);
+		txtBottari.setBackground(Color.LIGHT_GRAY);
 		txtBottari.setEditable(false);
 		txtBottari.setText("Bottari");
 		txtBottari.setBounds(38, 117, 151, 25);
@@ -131,8 +131,8 @@ public class FormPrenotazioneLibro extends JFrame {
 		txtBottari.setColumns(10);
 
 		txtMatteoingswcom = new JTextField();
-		txtMatteoingswcom.setForeground(SystemColor.menu);
-		txtMatteoingswcom.setBackground(SystemColor.activeCaptionText);
+		txtMatteoingswcom.setForeground(Color.BLACK);
+		txtMatteoingswcom.setBackground(Color.LIGHT_GRAY);
 		txtMatteoingswcom.setEditable(false);
 		txtMatteoingswcom.setText("matteo@ingSW.it");
 		txtMatteoingswcom.setBounds(38, 177, 151, 25);
@@ -140,8 +140,8 @@ public class FormPrenotazioneLibro extends JFrame {
 		txtMatteoingswcom.setColumns(10);
 
 		txtPassword = new JPasswordField();
-		txtPassword.setForeground(SystemColor.menu);
-		txtPassword.setBackground(SystemColor.activeCaptionText);
+		txtPassword.setForeground(Color.BLACK);
+		txtPassword.setBackground(Color.LIGHT_GRAY);
 		txtPassword.setEditable(false);
 		txtPassword.setToolTipText("");
 		txtPassword.setBounds(38, 237, 151, 25);
@@ -278,7 +278,7 @@ public class FormPrenotazioneLibro extends JFrame {
 
 
 		JPanel panelPrenotazione = new JPanel();
-		panelPrenotazione.setBackground(new Color(0, 0, 0, 215)); // semi-trasparente
+		panelPrenotazione.setBackground(new Color(0, 0, 0, 100)); // semi-trasparente
 		panelPrenotazione.setVisible(false);  // all'avvio nascosto
 		panelPrenotazione.setBounds(10, 10, 600, 430);  // sovrapposto a contentPane
 		panelPrenotazione.setLayout(null);
@@ -382,7 +382,7 @@ public class FormPrenotazioneLibro extends JFrame {
 
 		int y = 20;
 		JLabel labelIstruzioni = new JLabel("Seleziona un libro disponibile:");
-		labelIstruzioni.setBackground(Color.LIGHT_GRAY);
+		labelIstruzioni.setBackground(Color.WHITE);
 		labelIstruzioni.setForeground(Color.LIGHT_GRAY);
 		labelIstruzioni.setBounds(10, y, 300, 20);
 		panelPrenotazione.add(labelIstruzioni);
@@ -393,6 +393,8 @@ public class FormPrenotazioneLibro extends JFrame {
 		for (int i = 0; i < libri.size(); i++) {
 			radioButtons[i] = new JRadioButton(libri.get(i).toString());
 			radioButtons[i].setBounds(10, y, 500, 20);
+			radioButtons[i].setForeground(Color.BLACK);
+			radioButtons[i].setBackground(Color.LIGHT_GRAY);
 			panelPrenotazione.add(radioButtons[i]);
 			gruppoLibri.add(radioButtons[i]);
 			y += 30;
@@ -453,7 +455,7 @@ public class FormPrenotazioneLibro extends JFrame {
 				}
 
 				// inizio creazione prenotazione
-				int idPrenotazione = (int)(Math.random() * 100000);
+				int idPrenotazione;
 
 				//Calcolo del costo totale tramite controller
 				String txtPasswordString = new String(txtPassword.getPassword());
@@ -462,7 +464,7 @@ public class FormPrenotazioneLibro extends JFrame {
 				double costoTotale = controllerPren.calcolaPrezzo(inputDate);
 
 				try {
-					controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
+					idPrenotazione = controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
 				} catch (ClassNotFoundException | SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stato della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
 					return;
@@ -484,7 +486,7 @@ public class FormPrenotazioneLibro extends JFrame {
 			}
 		});
 
-		btnConferma.setBounds(460, y + 50, 100, 25);
+		btnConferma.setBounds(410, y + 50, 180, 25);
 		panelPrenotazione.add(btnConferma);
 
 		contentPane.add(panelPrenotazione);
@@ -492,7 +494,7 @@ public class FormPrenotazioneLibro extends JFrame {
 		lblNewLabel_4 = new JLabel("📚Catalogo Libri Disponibili📖");
 		lblNewLabel_4.setBackground(Color.LIGHT_GRAY);
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_4.setBounds(209, 0, 158, 35);
+		lblNewLabel_4.setBounds(209, 0, 165, 35);
 		panelPrenotazione.add(lblNewLabel_4);
 	}
 }
