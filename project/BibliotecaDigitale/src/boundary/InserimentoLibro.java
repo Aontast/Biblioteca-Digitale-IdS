@@ -21,8 +21,6 @@ public class InserimentoLibro extends JFrame {
     private JTextField txtISBN;
     private JTextArea txtDescrizione;
 
-    private Runnable onCancel;
-
     private Image backgroundImage;
 
     public InserimentoLibro() {
