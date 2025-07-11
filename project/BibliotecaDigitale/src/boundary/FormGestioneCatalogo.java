@@ -72,10 +72,7 @@ public class FormGestioneCatalogo extends JFrame {
         contentPane.add(panelBottoni, BorderLayout.CENTER);
 
         btnAggiungiLibro.addActionListener(e -> {
-            InserimentoLibro form = new InserimentoLibro(() -> {
-                FormGestioneCatalogo nuovoForm = new FormGestioneCatalogo();
-                nuovoForm.setVisible(true);
-            });
+            InserimentoLibro form = new InserimentoLibro();
             form.setVisible(true);
             this.dispose();
         });

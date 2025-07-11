@@ -2,6 +2,8 @@ package boundary;
 
 import control.ControllerCatalogo;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
@@ -22,11 +24,6 @@ public class InserimentoLibro extends JFrame {
     private Runnable onCancel;
 
     private Image backgroundImage;
-
-    public InserimentoLibro(Runnable onCancel) {
-        this();
-        this.onCancel = onCancel;
-    }
 
     public InserimentoLibro() {
         // --- CARICAMENTO IMMAGINE DI SFONDO ---
@@ -192,10 +189,21 @@ public class InserimentoLibro extends JFrame {
         btnAnnulla.setBounds(400, yStart + 5 * yStep + 180, 150, 40);
         contentPane.add(btnAnnulla);
 
-        btnAnnulla.addActionListener(e -> {
-            dispose();
-            if (onCancel != null) onCancel.run();
+
+        btnAnnulla.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                EventQueue.invokeLater(() -> {
+                    try {
+                        FormGestioneCatalogo frame = new FormGestioneCatalogo();
+                        frame.setVisible(true);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                });
+            }
         });
+
         btnConferma.addActionListener(e -> {
             String titolo = txtTitolo.getText().trim();
             String autore = txtAutore.getText().trim();
