@@ -32,8 +32,8 @@ public class PrenotazioneDAO {
                 "INSERT INTO prenotazioni (DataConsegna, Costo, Copia, Utente) VALUES('%s', %f, %d, '%s')",
                 prenotazione.getDataConsegna(), // Assicurati che questo sia già una stringa formattata correttamente per il DB (es. "yyyy-MM-dd HH:mm:ss")
                 prenotazione.getCostoPrestito(),
-                prenotazione.getCopiaLibro().getID(),
-                prenotazione.getUtenteRegistrato().getEmail()
+                prenotazione.getIDCopia(),
+                prenotazione.getEmailUtente()
         );
 
         try {
@@ -92,6 +92,7 @@ public class PrenotazioneDAO {
                 );
 
                 listaPrenotazioni.add(new Prenotazione(
+                    rs.getInt("IDPrenotazione"),
                     rs.getDate("DataConsegna"),
                     rs.getDouble("Costo"),
                     copia,

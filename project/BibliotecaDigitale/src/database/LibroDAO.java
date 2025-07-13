@@ -81,6 +81,39 @@ public class LibroDAO {
         return listaLibri;
     }
 
+    public List<Libro> getAllLibriDisponibili() {
+
+        List<Libro> listaLibri = new ArrayList<>();
+
+        try {
+            String query = "SELECT l.ISBN, l.Titolo, l.Autore, l.AnnoPubblicazione, l.Genere, l.Descrizione, l.NumeroCopie " +
+                           "FROM libri AS l " +
+                           "JOIN copie AS c ON l.ISBN = c.Libro " +
+                           "WHERE c.Stato = 'disponibile';";
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+
+            while(rs.next()) {
+                listaLibri.add(new Libro(
+                        rs.getLong("ISBN"),
+                        rs.getString("Titolo"),
+                        rs.getString("Autore"),
+                        rs.getInt("AnnoPubblicazione"),
+                        rs.getString("Genere"),
+                        rs.getString("Descrizione"),
+                        rs.getInt("NumeroCopie")
+                        )
+                );
+            }
+            System.out.println("[getAllLibriDisponibili] Libri Disponibili del database recuperati");
+            rs.close();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("[getAllLibriDisponibili] Libri Disponibili del database non recuperati: " + e.getMessage());
+        }
+
+        return listaLibri;
+    }
+
     /**
      * Metodo per cercare un libro nel database tramite il suo ISBN
      * @param isbn ISBN del libro da cercare

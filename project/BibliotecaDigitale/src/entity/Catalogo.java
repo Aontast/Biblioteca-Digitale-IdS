@@ -61,15 +61,8 @@ public class Catalogo {
 
     public List<Libro> mostraLibriDisponibili(){
         
-        List<Libro> libriTotali = mostraCatalogo();
-        List<Libro> libriDisponibili = new ArrayList<>();
-
-        // Filtra i libri disponibili
-        for (Libro libro : libriTotali) {
-            if (libro.verificaDisponibilitaLibro()) {
-                libriDisponibili.add(libro);
-            }
-        }
+        LibroDAO libroDAO = new LibroDAO();
+        List<Libro> libriDisponibili = libroDAO.getAllLibriDisponibili();
 
         return libriDisponibili;
     }

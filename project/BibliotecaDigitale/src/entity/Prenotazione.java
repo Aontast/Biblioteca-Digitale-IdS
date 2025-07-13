@@ -10,14 +10,9 @@ public class Prenotazione {
     private Date dataConsegna;
     private CopiaLibro copiaLibro;
     private UtenteRegistrato utenteRegistrato;
-    
-    public Prenotazione(Date dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
-        this.IDPrenotazione = -1; //per indicare che non è ancora stato assegnato dal DB
-        this.costoPrestito = costoPrestito;
-        this.dataConsegna = dataConsegna;
-        this.copiaLibro = copiaLibro;
-        this.utenteRegistrato = utenteRegistrato;
-    }
+
+    private int IDCopia;
+    private String emailUtente;
     
     public Prenotazione(int IDPrenotazione, Date dataConsegna, double costoPrestito, CopiaLibro copiaLibro, UtenteRegistrato utenteRegistrato) {
         this.IDPrenotazione = IDPrenotazione;
@@ -25,6 +20,14 @@ public class Prenotazione {
         this.dataConsegna = dataConsegna;
         this.copiaLibro = copiaLibro;
         this.utenteRegistrato = utenteRegistrato;
+    }
+
+    public Prenotazione(Date dataConsegna, double costoPrestito, int idCopia , String email) {
+        this.IDPrenotazione = -1; // per indicare che non è ancora stato assegnato dal DB;
+        this.costoPrestito = costoPrestito;
+        this.dataConsegna = dataConsegna;
+        this.IDCopia = idCopia;
+        this.emailUtente = email;
     }
 
     public void salvaPrenotazione(){
@@ -37,6 +40,14 @@ public class Prenotazione {
         } else {
             System.err.println("[salvaPrenotazione] Prenotazione non salvata nel database");
         }
+    }
+
+    public int getIDCopia() {
+        return IDCopia;
+    }
+
+    public String getEmailUtente() {
+        return emailUtente;
     }
 
     public CopiaLibro getCopiaLibro() {

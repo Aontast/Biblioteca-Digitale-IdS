@@ -5,8 +5,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import DTO.ClienteDTO;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -18,9 +16,7 @@ public class FormProfiloUtente extends JFrame {
     private JTextField txtMatteoingswcom;
     private JPasswordField txtPassword;
 	private Image backgroundImage;
-
-    private ClienteDTO clienteProfilo;
-    private PrenotazioneLibro panelPrenotazione;
+	private JPanel panelRingraziamento;
 
     /**
 	 * Launch the application.
@@ -42,6 +38,7 @@ public class FormProfiloUtente extends JFrame {
 	 * Create the frame.
 	 */
 	public FormProfiloUtente() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 643, 489);
 
@@ -83,12 +80,8 @@ public class FormProfiloUtente extends JFrame {
 		initializeUserInterface();
 		
 		// Crea il pannello di ringraziamento
-		JPanel panelRingraziamento = createPanelRingraziamento();
+		panelRingraziamento = createPanelRingraziamento();
 		contentPane.add(panelRingraziamento);
-		
-		// Crea il pannello di prenotazione usando la nuova classe
-		panelPrenotazione = new PrenotazioneLibro(panelRingraziamento, this);
-		contentPane.add(panelPrenotazione);
 	}
 	
 	private void initializeUserInterface() {
@@ -198,15 +191,15 @@ public class FormProfiloUtente extends JFrame {
 		btnNewButton_2.setBounds(10, 60, 204, 21);
 		panelMenu.add(btnNewButton_2);
 
-		JButton btnNewButton_3 = new JButton("Effettua Prenotazione");
-		btnNewButton_3.setBackground(Color.LIGHT_GRAY);
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showPrenotazionePanel();
-			}
-		});
-		btnNewButton_3.setBounds(10, 110, 204, 21);
-		panelMenu.add(btnNewButton_3);
+        JButton btnNewButton_3 = new JButton("Effettua Prenotazione");
+        btnNewButton_3.setBackground(Color.LIGHT_GRAY);
+        btnNewButton_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                effettuaPrenotazione(txtMatteoingswcom.getText());
+            }
+        });
+        btnNewButton_3.setBounds(10, 110, 204, 21);
+        panelMenu.add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("Gestisci Prenotazioni");
 		btnNewButton_4.setBackground(Color.LIGHT_GRAY);
@@ -344,34 +337,19 @@ public class FormProfiloUtente extends JFrame {
         panelRingraziamento.add(btnTornaMenu);
         return panelRingraziamento;
     }
-	
-	private void showPrenotazionePanel() {
-        // Nasconde tutti i componenti del form principale
-        hideMainComponents();
-        // Mostra il pannello di prenotazione
-        panelPrenotazione.setVisible(true);
-    }
-    
-    private void hideMainComponents() {
-        Component[] components = contentPane.getComponents();
+
+    private void effettuaPrenotazione(String emailUtente) {
+
+		PrenotazioneLibro panelPrenotazione = new PrenotazioneLibro(emailUtente,  panelRingraziamento);
+		contentPane.add(panelPrenotazione);
+
+		Component[] components = contentPane.getComponents();
         for (Component comp : components) {
             if (comp != panelPrenotazione) {
                 comp.setVisible(false);
             }
-        }
-    }
-    
-    // Metodo getter per il ClienteDTO (necessario per PrenotazioneLibro)
-    public ClienteDTO getClienteProfilo() {
-        if (clienteProfilo == null) {
-            String txtPasswordString = new String(txtPassword.getPassword());
-            clienteProfilo = new ClienteDTO(
-                txtMatteo.getText(), 
-                txtBottari.getText(), 
-                txtMatteoingswcom.getText(), 
-                txtPasswordString
-            );
-        }
-        return clienteProfilo;
+		}
+		panelRingraziamento.setVisible(false);
+        panelPrenotazione.setVisible(true);
     }
 }

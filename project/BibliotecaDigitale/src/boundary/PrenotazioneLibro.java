@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import DTO.ClienteDTO;
 import DTO.LibroDTO;
 import control.ControllerCatalogo;
 import control.ControllerPrenotazione;
@@ -21,12 +20,12 @@ public class PrenotazioneLibro extends JPanel {
     private JTextField txtData;
     private JRadioButton[] radioButtons;
     private List<LibroDTO> libri;
-    private final JPanel panelRingraziamento;
-    private final FormProfiloUtente parentFrame;
+    private String emailUtente;
+    private JPanel panelRingraziamento;
     
-    public PrenotazioneLibro(JPanel panelRingraziamento, FormProfiloUtente parentFrame) {
+    public PrenotazioneLibro(String emailUtente, JPanel panelRingraziamento) {
+        this.emailUtente = emailUtente;
         this.panelRingraziamento = panelRingraziamento;
-        this.parentFrame = parentFrame;
         
         setBackground(new Color(0, 0, 0, 100)); // semi-trasparente
         setVisible(false);  // all'avvio nascosto
@@ -42,7 +41,6 @@ public class PrenotazioneLibro extends JPanel {
         libri = controllerC.mostraLibriDisponibili();
 
         ButtonGroup gruppoLibri = new ButtonGroup();
-        
         int y = 20;
         
         // Etichetta del catalogo
@@ -69,7 +67,7 @@ public class PrenotazioneLibro extends JPanel {
             radioButtons[i].setBackground(Color.LIGHT_GRAY);
             add(radioButtons[i]);
             gruppoLibri.add(radioButtons[i]);
-            y += 30;
+            y += 35;
         }
         
         // Label per la data
@@ -98,8 +96,6 @@ public class PrenotazioneLibro extends JPanel {
     }
     
     private void confermaPrenotazione() {
-        String dataRest = txtData.getText();
-        Date inputDate;
         
         // Trova l'indice del radio selezionato
         int selectedIndex = -1;
@@ -111,12 +107,13 @@ public class PrenotazioneLibro extends JPanel {
         }
         
         // Validazione: libro e data
+        String dataRest = txtData.getText();
+        Date inputDate;
+
         if (selectedIndex == -1 || dataRest.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Seleziona un libro e inserisci la data di restituzione.", "Errore campi vuoti", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        LibroDTO libroSelezionato = libri.get(selectedIndex);
         
         // Validazione formato data
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -138,14 +135,13 @@ public class PrenotazioneLibro extends JPanel {
         
         // Inizio creazione prenotazione
         int idPrenotazione;
+        // Recupera isbn libro selezionato
+        LibroDTO libroSelezionato = libri.get(selectedIndex);
         
-        // Ottieni i dati del cliente dal parent frame
-        ClienteDTO clienteProfilo = parentFrame.getClienteProfilo();
-        String email = clienteProfilo.getEmail();
         double costoTotale = controllerPren.calcolaPrezzo(inputDate);
         
         try {
-            idPrenotazione = controllerPren.prenotaLibroDisponibile(libroSelezionato, clienteProfilo, costoTotale, inputDate);
+            idPrenotazione = controllerPren.prenotaLibroDisponibile(libroSelezionato, emailUtente, costoTotale, inputDate);
         } catch (ClassNotFoundException | SQLException e1) {
             JOptionPane.showMessageDialog(null, "Il server non è riuscito a cambiare lo stato della copia, riprovare.", "Errore nella prenotazione", JOptionPane.ERROR_MESSAGE);
             return;
@@ -156,13 +152,11 @@ public class PrenotazioneLibro extends JPanel {
                 idPrenotazione,
                 libroSelezionato.getTitolo(),
                 libroSelezionato.getCodiceISBN(),
-                email,
+                emailUtente,
                 dataRest,
                 costoTotale
         );
         ricevutaFrame.setVisible(true);
-        
-        // Cambia pannello -> Pannello di ringraziamento
         setVisible(false);
         panelRingraziamento.setVisible(true);
     }

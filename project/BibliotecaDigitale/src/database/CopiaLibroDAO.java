@@ -84,6 +84,41 @@ public class CopiaLibroDAO {
         return listaCopie;
     }
 
+    public List<CopiaLibro> getCopieDisponibiliByISBN(long isbn) {
+        List<CopiaLibro> listaCopie = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM copie c JOIN libri l ON c.Libro = l.ISBN WHERE c.Stato = 'disponibile' AND ISBN = " + isbn;
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+
+            while(rs.next()) {
+                Libro libro = new Libro(
+                        rs.getLong("ISBN"),
+                        rs.getString("Titolo"),
+                        rs.getString("Autore"),
+                        rs.getInt("AnnoPubblicazione"),
+                        rs.getString("Genere"),
+                        rs.getString("Descrizione"),
+                        rs.getInt("NumeroCopie")
+                );
+
+                listaCopie.add(new CopiaLibro(
+                        rs.getInt("IDCopia"),
+                        rs.getString("Stato"),
+                        libro
+                        )
+                );
+            }
+            System.out.println("[getCopieDisponibiliByISBN] Copie del database recuperate");
+            rs.close();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("[getCopieDisponibiliByISBN] Copie del database non recuperate: " + e.getMessage());
+        }
+
+        return listaCopie;
+    }
+
     public void updateStato(CopiaLibro copia) throws SQLException, ClassNotFoundException {
     String query = String.format("UPDATE copie SET Stato = '%s' WHERE IDCopia = %d",
             copia.getStato().toString(),

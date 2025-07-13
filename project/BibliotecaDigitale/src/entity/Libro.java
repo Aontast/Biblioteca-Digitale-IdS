@@ -53,18 +53,12 @@ public class Libro {
         return false; // Se non trova nessuna copia disponibile, ritorna false
     }
 
-    public List<CopiaLibro> getCopieDisponibili() {
+    public CopiaLibro getCopiaDisponibile() {
         CopiaLibroDAO copiaLibroDAO = new CopiaLibroDAO();
 
-        List<CopiaLibro> listaCopieDisp = copiaLibroDAO.getCopieDisponibili();
-        List<CopiaLibro> copieLibroDisponbili = new ArrayList<>();
-
-        for (CopiaLibro copia : listaCopieDisp) {
-            if (copia.getLibro().getCodiceISBN() == this.codiceISBN) {
-                copieLibroDisponbili.add(copia);
-            }
-        }
-        return copieLibroDisponbili;
+        List<CopiaLibro> copieLibroDisponbili = copiaLibroDAO.getCopieDisponibiliByISBN(this.codiceISBN);
+        
+        return copieLibroDisponbili.get(0);
     }
 
     public void salvaLibro() throws SQLIntegrityConstraintViolationException, SQLException {
