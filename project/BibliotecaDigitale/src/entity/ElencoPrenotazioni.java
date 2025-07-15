@@ -14,7 +14,8 @@ public class ElencoPrenotazioni {
         return instance;
     }
 
-    public int creaPrenotazioneUtente(Date dataConsegna, double costo, CopiaLibro copiaLibro, String emailUtente) throws ClassNotFoundException, SQLException {
+    public int creaPrenotazioneUtente(Date dataConsegna, double costo, Libro libro, String emailUtente) throws ClassNotFoundException, SQLException {
+        CopiaLibro copiaLibro = libro.getCopiaDisponibile();
         Prenotazione prenotazione = new Prenotazione(dataConsegna, costo, copiaLibro.getID(), emailUtente);
         prenotazione.salvaPrenotazione();
         copiaLibro.aggiornaStatoPrenotato();

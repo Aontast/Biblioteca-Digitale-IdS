@@ -48,11 +48,9 @@ public class ControllerPrenotazione {
                 libroDTO.getGenere(),
                 libroDTO.getDescrizione()
         );
-        
-        CopiaLibro copiaLibro = libro.getCopiaDisponibile();
 
         ElencoPrenotazioni elencoPrenotazioni = ElencoPrenotazioni.getInstance();
-        int idPrenotazione = elencoPrenotazioni.creaPrenotazioneUtente(dataConsegna, costo, copiaLibro, email);
+        int idPrenotazione = elencoPrenotazioni.creaPrenotazioneUtente(dataConsegna, costo, libro, email);
 
         System.out.println("[prenotaLibroDisponibile] Prenotazione effettuata con successo per il libro: " + libro.getTitolo());
         return idPrenotazione;
