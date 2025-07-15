@@ -356,16 +356,16 @@ public class InserimentoLibro extends JFrame {
     }
     // --- FUNZIONI DI VALIDAZIONE PER OGNI CAMPO ---
     private boolean isTitoloValido(String titolo) {
-        return titolo.length() >= 1 && titolo.length() <= 50 && titolo.matches("[a-zA-Z0-9àèéìòù' ]+");
+        return titolo.length() >= 1 && titolo.length() <= 50;
     }
     private boolean isAutoreValido(String autore) {
-        return autore.length() >= 1 && autore.length() <= 50 && autore.matches("[a-zA-Zàèéìòù' ]+");
+        return autore.length() >= 1 && autore.length() <= 50;
     }
     private boolean isAnnoValido(String anno) {
         return anno.matches("\\d+") && Integer.parseInt(anno) >= 0;
     }
     private boolean isGenereValido(String genere) {
-        return genere.length() <= 50 && genere.matches("[a-zA-Z0-9àèéìòù' ]*");
+        return genere.length() <= 50;
     }
     private boolean isISBNValido(String isbn) {
         return isbn.matches("\\d+") && isbn.length() == 13;
