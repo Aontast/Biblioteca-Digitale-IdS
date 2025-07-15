@@ -13,8 +13,6 @@ public abstract class UtenteRegistrato {
     protected String password;
     protected int livelloPermesso;
 
-    private List<Prenotazione> prenotazioniUtente;
-
     /*
     livelloPermesso = 0 => Amministratore
     livelloPermesso = 1 => Addetto Alla Biblioteca
