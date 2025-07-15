@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,11 @@ public class ElencoPrenotazioni {
 
     private static ElencoPrenotazioni instance = null;
     private List<Prenotazione> elencoPrenotazioni;
+
+    private ElencoPrenotazioni() {
+        super();
+        elencoPrenotazioni = new ArrayList<>();
+    }
 
     public static synchronized ElencoPrenotazioni getInstance() {
         if (instance == null) {

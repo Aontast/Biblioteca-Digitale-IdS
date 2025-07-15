@@ -4,6 +4,7 @@ import database.UtenteRegistratoDAO;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SistemaAutenticazione {
@@ -14,6 +15,7 @@ public class SistemaAutenticazione {
 
     private SistemaAutenticazione() {
         super();
+        utentiRegistrati = new ArrayList<>();
     }
 
     public static synchronized SistemaAutenticazione getInstance() {
