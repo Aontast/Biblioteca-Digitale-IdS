@@ -2,6 +2,7 @@ package entity;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 import database.UtenteRegistratoDAO;
 
@@ -11,6 +12,8 @@ public abstract class UtenteRegistrato {
     protected String email;
     protected String password;
     protected int livelloPermesso;
+
+    private List<Prenotazione> prenotazioniUtente;
 
     /*
     livelloPermesso = 0 => Amministratore

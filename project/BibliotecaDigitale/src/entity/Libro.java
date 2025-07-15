@@ -16,8 +16,9 @@ public class Libro {
     private String genere;
     private long codiceISBN;
     private String descrizione;
-
     private int numeroCopieTotali;
+
+    private List<CopiaLibro> copieLibro;
 
     public Libro(long codiceISBN, String titolo, String autore, int annoDiPubblicazione, String genere, String descrizione) {
         this.codiceISBN = codiceISBN;
@@ -27,6 +28,7 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = 0;
+        copieLibro = new ArrayList<>();
     }
 
     //costruttore per quando viene prelevato un libro da database
@@ -39,6 +41,7 @@ public class Libro {
         this.genere = genere;
         this.descrizione = descrizione;
         this.numeroCopieTotali = numeroCopieTotali;
+        copieLibro = new ArrayList<>();
     }
 
     public boolean verificaDisponibilitaLibro() {
