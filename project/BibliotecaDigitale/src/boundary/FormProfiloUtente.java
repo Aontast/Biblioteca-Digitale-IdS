@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 public class FormProfiloUtente extends JFrame {
 
     private JPanel contentPane;
-    private JTextField txtMatteo;
-    private JTextField txtBottari;
-    private JTextField txtMatteoingswcom;
+    private JTextField txtNome;
+    private JTextField txtCognome;
+    private JTextField txtEmail;
     private JPasswordField txtPassword;
 	private Image backgroundImage;
 	private JPanel panelRingraziamento;
@@ -102,32 +102,32 @@ public class FormProfiloUtente extends JFrame {
 		lblNewLabel_2.setBounds(38, 160, 45, 13);
 		contentPane.add(lblNewLabel_2);
 
-		txtMatteo = new JTextField();
-		txtMatteo.setForeground(Color.BLACK);
-		txtMatteo.setBackground(Color.LIGHT_GRAY);
-		txtMatteo.setEditable(false);
-		txtMatteo.setText("Matteo");
-		txtMatteo.setBounds(38, 57, 151, 25);
-		contentPane.add(txtMatteo);
-		txtMatteo.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setForeground(Color.BLACK);
+		txtNome.setBackground(Color.LIGHT_GRAY);
+		txtNome.setEditable(false);
+		txtNome.setText("Matteo");
+		txtNome.setBounds(38, 57, 151, 25);
+		contentPane.add(txtNome);
+		txtNome.setColumns(10);
 
-		txtBottari = new JTextField();
-		txtBottari.setForeground(Color.BLACK);
-		txtBottari.setBackground(Color.LIGHT_GRAY);
-		txtBottari.setEditable(false);
-		txtBottari.setText("Bottari");
-		txtBottari.setBounds(38, 117, 151, 25);
-		contentPane.add(txtBottari);
-		txtBottari.setColumns(10);
+		txtCognome = new JTextField();
+		txtCognome.setForeground(Color.BLACK);
+		txtCognome.setBackground(Color.LIGHT_GRAY);
+		txtCognome.setEditable(false);
+		txtCognome.setText("Bottari");
+		txtCognome.setBounds(38, 117, 151, 25);
+		contentPane.add(txtCognome);
+		txtCognome.setColumns(10);
 
-		txtMatteoingswcom = new JTextField();
-		txtMatteoingswcom.setForeground(Color.BLACK);
-		txtMatteoingswcom.setBackground(Color.LIGHT_GRAY);
-		txtMatteoingswcom.setEditable(false);
-		txtMatteoingswcom.setText("matteo@ingSW.it");
-		txtMatteoingswcom.setBounds(38, 177, 151, 25);
-		contentPane.add(txtMatteoingswcom);
-		txtMatteoingswcom.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setForeground(Color.BLACK);
+		txtEmail.setBackground(Color.LIGHT_GRAY);
+		txtEmail.setEditable(false);
+		txtEmail.setText("matteo@ingSW.it");
+		txtEmail.setBounds(38, 177, 151, 25);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 
 		txtPassword = new JPasswordField();
 		txtPassword.setForeground(Color.BLACK);
@@ -195,7 +195,7 @@ public class FormProfiloUtente extends JFrame {
         btnNewButton_3.setBackground(Color.LIGHT_GRAY);
         btnNewButton_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                effettuaPrenotazione(txtMatteoingswcom.getText());
+                effettuaPrenotazione(txtEmail.getText());
             }
         });
         btnNewButton_3.setBounds(10, 110, 204, 21);
