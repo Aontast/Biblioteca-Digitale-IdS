@@ -4,13 +4,13 @@ import database.LibroDAO;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class Catalogo {
 
     private static Catalogo instance = null;
+    private List<Libro> libri;
 
     private Catalogo(){
         super();
@@ -31,7 +31,8 @@ public class Catalogo {
         // Istanzia un oggetto LibroDAO per interagire con il database
         // e recuperare la lista dei libri
         LibroDAO libroDAO = new LibroDAO();
-        return libroDAO.getAllLibri();
+        libri = libroDAO.getAllLibri();
+        return libri;
     }
 
     public void filtraCatalogo(){

@@ -2,10 +2,12 @@ package entity;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class ElencoPrenotazioni {
 
     private static ElencoPrenotazioni instance = null;
+    private List<Prenotazione> elencoPrenotazioni;
 
     public static synchronized ElencoPrenotazioni getInstance() {
         if (instance == null) {

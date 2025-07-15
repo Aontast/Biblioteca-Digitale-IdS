@@ -4,11 +4,14 @@ import database.UtenteRegistratoDAO;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public class SistemaAutenticazione {
 
     // Singleton pattern
     private static SistemaAutenticazione instance = null;
+    private List<UtenteRegistrato> utentiRegistrati;
+
     private SistemaAutenticazione() {
         super();
     }
