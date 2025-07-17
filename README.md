@@ -59,18 +59,19 @@ L'applicazione è stata progettata seguendo una moderna architettura a livelli.
 │   ├── ProgettoBiblioteca.docx
 │   └── ProgettoBiblioteca.pdf
 ├── JavaProject/
-│   └── BibliotecaDigitale/
+│   ├── BibliotecaDigitale/
 │       └── src/
-│           ├── boundary/          # Componenti UI
-│           ├── control/           # Controller
-│           ├── entity/            # Modelli di Dominio
-│           ├── database/          # Classi DAO
-│           └── DTO/              # Data Transfer Objects
-├── MySql/                        # Script Database
-│   ├── biblioteca_copie.sql
-│   ├── biblioteca_libri.sql
-│   ├── biblioteca_prenotazioni.sql
-│   └── biblioteca_utenti.sql
+│           ├── boundary/          
+│           ├── control/           
+│           ├── entity/            
+│           ├── database/          
+│           ├── DTO/
+│           └── resources/            
+│   └──MySql/                        
+│      ├── biblioteca_copie.sql
+│      ├── biblioteca_libri.sql
+│      ├── biblioteca_prenotazioni.sql
+│      └── biblioteca_utenti.sql
 └── VisualParadigm/
     └── BibliotecaDigitale.vpp    # Diagrammi UML
 ```
