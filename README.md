@@ -10,6 +10,9 @@ Questo progetto implementa un sistema di gestione per biblioteca digitale che co
 
 Il software offre funzionalità distinte per i diversi attori che interagiscono con il sistema.
 
+### Per gli Utenti non Registrati
+- **Registrazione**: Possibilità di effettuare richiesta di registrazione di un nuovo account
+
 ### Per gli Utenti Registrati
 - **Consultazione Catalogo**: Possibilità di cercare libri nel catalogo digitale utilizzando filtri per autore, genere o anno di pubblicazione.
 - **Gestione Profilo Personale**: Dopo la registrazione e l'autenticazione, gli utenti possono accedere a un'area personale per visualizzare e modificare i propri dati, caricare un'immagine del profilo e consultare lo storico dei prestiti.
