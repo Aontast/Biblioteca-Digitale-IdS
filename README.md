@@ -10,14 +10,17 @@ Questo progetto implementa un sistema di gestione per biblioteca digitale che co
 
 Il software offre funzionalità distinte per i diversi attori che interagiscono con il sistema.
 
-### Per gli Utenti non Registrati
+### Per gli Utenti
+- **Consultazione Catalogo**: Possibilità di cercare libri nel catalogo digitale utilizzando filtri per autore, genere o anno di pubblicazione.
+
+### Per gli Utenti Non Registrati
 - **Registrazione**: Possibilità di effettuare richiesta di registrazione di un nuovo account
 
 ### Per gli Utenti Registrati
-- **Consultazione Catalogo**: Possibilità di cercare libri nel catalogo digitale utilizzando filtri per autore, genere o anno di pubblicazione.
 - **Gestione Profilo Personale**: Dopo la registrazione e l'autenticazione, gli utenti possono accedere a un'area personale per visualizzare e modificare i propri dati, caricare un'immagine del profilo e consultare lo storico dei prestiti.
 - **Prenotazione Libri**: Gli utenti possono prenotare una copia di un libro disponibile. Il sistema verifica la disponibilità e, in caso positivo, riserva la copia per l'utente.
 - **Gestione Prenotazioni**: È possibile visualizzare le prenotazioni attive e annullarle in qualsiasi momento.
+- **Cronologia Libri Consultati**: È possibile visualizzare la cronologia di tutti i libri consultati in passato.
 
 ### Per gli Addetti alla Biblioteca
 - **Gestione Ritiri**: Gli addetti possono visualizzare l'elenco delle prenotazioni e registrare il ritiro di una copia da parte di un utente, aggiornandone lo stato a "in prestito".
